@@ -2,10 +2,10 @@ CREATE DATABASE IF NOT EXISTS mydb;
 USE mydb;
 
 CREATE TABLE IF NOT EXISTS Teachers (
-    ID varchar(255) NOT NULL AUTO_INCREMENT,
+    ID varchar(255) NOT NULL,
     NAME varchar(255),
     SURNAME varchar(255),
-    USERNAME varchar(255) NOT NULL,
+    USERNAME varchar(255) NOT NULL UNIQUE,
     PASSWORD varchar(255) NOT NULL,
     EMAIL varchar(255),
     PRIMARY KEY (ID)

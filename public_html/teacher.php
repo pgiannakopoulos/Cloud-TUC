@@ -8,8 +8,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-
-$firstname = htmlspecialchars($_SESSION["firstname"]);
+//The htmlspecialchars() function converts special characters to HTML entities. This means that it will replace HTML characters like < and > with &lt; and &gt;. This prevents attackers from exploiting the code by injecting HTML or Javascript code (Cross-site Scripting attacks) in forms.
+$firstname = htmlspecialchars($_SESSION["firstname"]); //
 $surname = htmlspecialchars($_SESSION["surname"]);
  
  ?>
@@ -28,7 +28,7 @@ $surname = htmlspecialchars($_SESSION["surname"]);
 <body>
     <ul class="topnav">
         <li><a class="active" href="#home">Dashboard</a></li>
-        <li><a href="#news">Add</a></li>
+        <li><a href="addstudent.php">Add</a></li>
         <li><a href="#contact">Edit</a></li>
         <li><a href="#contact">Delete</a></li>
         <li><a href="#contact">Search</a></li>

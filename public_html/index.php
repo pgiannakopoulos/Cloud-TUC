@@ -10,7 +10,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
-require_once "data.php";
+require_once "functions.php";
+
+//require_once "data.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -23,14 +25,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $err = "Please enter username.";
     } else{
-        $username = trim($_POST["username"]);
+        $username = secure_input($_POST["username"]); 
     }
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
         $err = "Please enter your password.";
     } else{
-        $password = trim($_POST["password"]);
+        $password = $_POST["password"];
     }
     
     // Validate credentials
@@ -105,6 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="login">
         <h1>Login</h1>
         <p>Please fill in your credentials to login.</p>
+        <!-- The $_SERVER["PHP_SELF"] is a super global variable that returns the filename of the currently executing script. -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <label for="username">
                     <i class="fas fa-user"></i>
@@ -115,6 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </label>
                 <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
             <div class="form-group">
+                <?php echo $password; ?>
                 <input type="submit" value="Sumbit">
             </div>
         </form>
