@@ -7,8 +7,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
 }
-?>
+
+
+$firstname = htmlspecialchars($_SESSION["firstname"]);
+$surname = htmlspecialchars($_SESSION["surname"]);
  
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,27 +26,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style> -->
 </head>
 <body>
-<!--     <div class="topnav">
-  <a class="active" href="#home">Dashboard</a>
-  <a href="#news">Add</a>
-  <a href="#contact">Edit</a>
-  <a href="#about">Delete</a>
-  <a href="#about">Search</a>
-  <li style="float:right"><a href="#about">About</a></li>
-</div> -->
-<ul class="topnav">
-  <li><a class="active" href="#home">Dashboard</a></li>
-  <li><a href="#news">Add</a></li>
-  <li><a href="#contact">Edit</a></li>
-  <li><a href="#contact">Delete</a></li>
-  <li><a href="#contact">Search</a></li>
-  <li style="float:right">
-    <a href="javascript:void(0)" class="dropbtn"><?php echo htmlspecialchars($_SESSION["username"]); ?></a>
-    <div class="dropdown-content">
-      <a href="logout.php">logout</a>
-    </div>
-  </li>
-</ul>
+    <ul class="topnav">
+        <li><a class="active" href="#home">Dashboard</a></li>
+        <li><a href="#news">Add</a></li>
+        <li><a href="#contact">Edit</a></li>
+        <li><a href="#contact">Delete</a></li>
+        <li><a href="#contact">Search</a></li>
+        <li style="float:right" class="dropdown">
+            <a class="dropbtn"><?php echo $firstname." ".$surname; ?></a>
+            <div class="dropdown-content">
+                <a href="logout.php">logout</a>
+            </div>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

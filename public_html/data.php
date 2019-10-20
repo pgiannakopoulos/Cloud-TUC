@@ -12,8 +12,8 @@ if ($conn->connect_error) {
     echo "Connected to MySQL successfully!";
 }
 
-$sql = "INSERT INTO Teachers
-VALUES ('3476', 'Doe', 'Kosa', 'myname', 'pasw', 'ks@gmail.com')";
+$sql = "INSERT INTO Teachers(ID, NAME,SURNAME,USERNAME,PASSWORD,EMAIL)
+VALUES ('243','Doe', 'Kosa', 'myname', 'pasw', 'ks@gmail.com')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
