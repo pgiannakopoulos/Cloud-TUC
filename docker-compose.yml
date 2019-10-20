@@ -55,8 +55,8 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword 
     networks:
       - backend
+    container_name: phpmyadmin
 networks:
-  frontend:
   backend:
 volumes:
     data:
