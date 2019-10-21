@@ -1,10 +1,12 @@
 <?php
 // Initialize the session
- session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
  
  // define variables and set to empty values
-$err = $message = "";
-$name = $email ="";
+$message = "";
+$id = $name = $surname = $fathername =  $grade = $mobile_number = $birthday = "";
 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -14,20 +16,37 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 // Include config file
 require_once "config.php";
+require_once "functions.php";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    $id = $_POST["id"];
-    $name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $fathername = $_POST["fathername"];
+    $id = secure_input($_POST["id"]);
+    $name = secure_input($_POST["name"]);
+    $surname = secure_input($_POST["surname"]);
+    $fathername = secure_input($_POST["fathername"]);
     $grade = (real)$_POST["grade"];
-    $mobile_number = $_POST["mobile_number"];
-    $birthday = $_POST["birthday"];
+    $mobile_number = secure_input($_POST["mobile_number"]);
+    $birthday = secure_input($_POST["birthday"]);
+
+    //Input format validation
+ 
+    // check if name only contains letters
+    if (!preg_match("/^[a-zA-Z]*$/",$name) or !preg_match("/^[a-zA-Z]*$/",$surname) or !preg_match("/^[a-zA-Z]*$/",$fathername)) {
+        $message = '<span style="color:red">Only letters are allowed to names!</span>';
+    }
+
+    if (!filter_var($grade, FILTER_VALIDATE_FLOAT)) {
+        $message = '<span style="color:red">Only number are allowed to grade!</span>';
+    }
+
+    if (!filter_var($mobile_number, FILTER_VALIDATE_INT)) {
+        $message = '<span style="color:red">Invalid mobile number!</span>';
+    }
+
     
     // Validate credentials
-    if(empty($err)){
+    if(empty($message)){
         // Prepare a select statement
         $sql = "INSERT INTO Students (ID, NAME, SURNAME, FATHERNAME, GRADE, MOBILENUMBER, Birthday)
         VALUES (?,?,?,?,?,?,?)";
@@ -35,10 +54,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssss", $id, $name, $surname, $fathername, $grade, $mobile_number, $birthday);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_id, $param_name, $param_surname, $param_fathername, $param_grade, $param_mobile_number, $param_birthday);
             
             // Set parameters
-            // $param_username = $username;
+            $param_id = $id;
+            $param_name = $name;
+            $param_surname = $surname;
+            $param_fathername = $fathername;
+            $param_grade = $grade;
+            $param_mobile_number = $mobile_number;
+            $param_birthday = $birthday;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -51,9 +76,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Close statement
         mysqli_stmt_close($stmt);
     }
-    
     // Close connection
-   mysqli_close($link);
+    mysqli_close($link);
 }
 
 ?>
@@ -84,42 +108,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <label for="name">First Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="name" id="name" placeholder="Kostas" value="<?php echo $name; ?>" required>
                 </div>
 
                 <div class="col-25">
                     <label for="surname">Last Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="surname" id="surname" required>
+                    <input type="text" name="surname" id="surname" placeholder="Kostopoulos" value="<?php echo $surname; ?>" required> 
                 </div>
 
                 <div class="col-25">
                     <label for="fathername">Father's name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="fathername" id="fathername" required>
+                    <input type="text" name="fathername" id="fathername" placeholder="Giannis" value="<?php echo $fathername; ?>" required> 
                 </div>
 
                 <div class="col-25">
                     <label for="grade">Grade</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="grade" id="grade" required>
+                    <input type="text" name="grade" id="grade" placeholder="7.5" value="<?php echo $grade; ?>" required> 
                 </div>
 
                 <div class="col-25">
                     <label for="mobile_number">Mobile number</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="mobile_number" id="mobile_number" required>
+                    <input type="text" name="mobile_number" id="mobile_number" placeholder="6925856000" value="<?php echo $mobile_number; ?>" required>
                 </div>
 
                 <div class="col-25">
                     <label for="birthday">Birthday</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="birthday" id="birthday" required>
+                    <input type="date" name="birthday" id="birthday" value="<?php echo $birthday; ?>" required> 
                 </div>
 
             <div class="form-group">
