@@ -4,7 +4,7 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: teacher.php");
+    header("location: Teacher.php");
     exit;
 }
  
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["password"]))){
         $err = "Please enter your password.";
     } else{
-        $password = $_POST["password"];
+        $password = secure_input($_POST["password"]);
     }
     
     // Validate credentials
@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["surname"] = $surname;                            
                             
                             // Redirect user to welcome page
-                            header("location: teacher.php");
+                            header("location: Teacher.php");
                         } else{
                             // Display an error message if password is not valid
                             $err = "The password you entered was not valid.";
@@ -100,7 +100,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -118,7 +117,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </label>
                 <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
             <div class="form-group">
-                <?php echo $password; ?>
                 <input type="submit" value="Sumbit">
             </div>
         </form>

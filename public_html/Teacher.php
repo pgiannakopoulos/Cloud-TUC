@@ -21,14 +21,11 @@ $surname = htmlspecialchars($_SESSION["surname"]);
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-<!--     <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
-    </style> -->
 </head>
 <body>
     <ul class="topnav">
-        <li><a class="active" href="#home">Dashboard</a></li>
-        <li><a href="addstudent.php">Add</a></li>
+        <li><a class="active" href="Teacher.php">Dashboard</a></li>
+        <li><a href="AddStudent.php">Add</a></li>
         <li><a href="#contact">Edit</a></li>
         <li><a href="#contact">Delete</a></li>
         <li><a href="#contact">Search</a></li>
