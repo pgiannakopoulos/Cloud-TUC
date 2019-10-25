@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <label for="id">ID</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="id" id="id" required>
+                    <input type="text" name="id" id="id" placeholder="1234" value="<?php echo $id; ?>" required>
                 </div>
 
                 <div class="col-25">

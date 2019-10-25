@@ -28,7 +28,7 @@ $surname = htmlspecialchars($_SESSION["surname"]);
     <ul class="topnav">
         <li><a class="active" href="Teacher.php">Dashboard</a></li>
         <li><a href="AddStudent.php">Add</a></li>
-        <li><a href="#contact">Edit</a></li>
+        <li><a href="EditStudent.php">Edit</a></li>
         <li><a href="#contact">Delete</a></li>
         <li><a href="#contact">Search</a></li>
         <li style="float:right" class="dropdown">
