@@ -20,9 +20,10 @@ require_once "functions.php";
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Edit Student</title>
+        <title>Delete Student</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href="css/style.css" rel="stylesheet" type="text/css">
+        <script src="js/scripts.js"></script>
     </head>
     <body>
         <?php include 'menu.php'; ?>
@@ -48,7 +49,7 @@ require_once "functions.php";
                         echo '<td align="center">'.$row["ID"].'</td>';
                         echo '<td align="center">'.$row["NAME"].'</td>';
                         echo '<td align="center">'.$row["SURNAME"].'</td>';
-                        echo '<td align="center"><a href="edit.php?id='.$row["ID"].'">Edit</a></td>';
+                        echo '<td align="center"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" >Delete</a></td>';
                     echo "</tr>";
                     } 
                 }

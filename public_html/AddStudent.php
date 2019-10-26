@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="Teacher.php"><button class="button button_back">Back to Dashboard</button></a>
+    <?php include 'menu.php'; ?>
     <div class="container admin_form">
         <h1>Add student</h1>
         <p>Please fill in the form.</p>
