@@ -20,43 +20,19 @@ require_once "functions.php";
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Delete Student</title>
+        <title>Search Student</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href="css/style.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="js/scripts.js"></script>
     </head>
     <body>
         <?php include 'menu.php'; ?>
-        <div class="student_list">
-            <table width="100%" border="1" style="border-collapse:collapse;">
-                <thead>
-                    <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Surname</strong></th>
-                        <th><strong>Action</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                <?php
-                $sql="SELECT ID, NAME, SURNAME FROM Students ORDER BY ID DESC;";
-                $result = mysqli_query($link,$sql);
-
-                if (mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) { 
-                    echo "<tr>";
-                        echo '<td align="center">'.$row["ID"].'</td>';
-                        echo '<td align="center">'.$row["NAME"].'</td>';
-                        echo '<td align="center">'.$row["SURNAME"].'</td>';
-                        echo '<td align="center"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" >Delete</a></td>';
-                    echo "</tr>";
-                    } 
-                }
-                mysqli_close($link);
-                ?>
-                </tbody>
-            </table>
+        <div class="search-box">
+            <input type="text" autocomplete="off" placeholder="Search a Student..." />
+            <div class="result">
+                Result box
+            </div>
         </div>
     </body>
 </html>

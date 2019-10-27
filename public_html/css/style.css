@@ -258,5 +258,39 @@ li.dropdown {
     padding: 10px;
 }
 
+/* Formatting search box */
+.search-box{
+  width: 60%;
+  /*background-color: #ffffff;*/
+  /*box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);*/
+  margin: 100px auto;
+}
+.search-box input[type="text"]{
+  height: 32px;
+  padding: 5px 10px;
+  border: 1px solid #CCCCCC;
+  font-size: 14px;
+}
+
+.result{      
+  z-index: 999;
+  margin-top: 100px
+}
+
+.search-box input[type="text"], .result{
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Formatting result items */
+.result p{
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid #CCCCCC;
+  border-top: none;
+  cursor: pointer;
+}
+/*.result p:hover{
+  background: #f2f2f2;
+}*/
 
 
