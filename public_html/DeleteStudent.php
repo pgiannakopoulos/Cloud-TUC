@@ -28,7 +28,7 @@ require_once "functions.php";
     <body>
         <?php include 'menu.php'; ?>
         <div class="student_list">
-            <table width="100%" border="1" style="border-collapse:collapse;">
+            <table>
                 <thead>
                     <tr>
                         <th><strong>ID</strong></th>

@@ -34,7 +34,6 @@ if(isset($_REQUEST["term"])){
             // Check number of rows in the result set
             if(mysqli_num_rows($result) > 0){
                 $output = "<table>
-                <thead>
                     <tr>
                         <th><strong>ID</strong></th>
                         <th><strong>Name</strong></th>
@@ -43,9 +42,7 @@ if(isset($_REQUEST["term"])){
                         <th><strong>Grade</strong></th>
                         <th><strong>Mobile number</strong></th>
                         <th><strong>Birthday</strong></th>
-                    </tr>
-                </thead>
-                <tbody>";
+                    </tr>";
                 // Fetch result rows as an associative array
                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                     $output.= '<tr>
@@ -58,10 +55,23 @@ if(isset($_REQUEST["term"])){
                                 <td>'.$row["Birthday"].'</td>
                             </tr>';
                 }
-                $output.= '<tbody>';
                 echo $output;
             } else{
-                echo "<p>No matches found</p>";
+                $output = "<table>
+                    <tr>
+                        <th><strong>ID</strong></th>
+                        <th><strong>Name</strong></th>
+                        <th><strong>Surname</strong></th>
+                        <th><strong>Father's name</strong></th>
+                        <th><strong>Grade</strong></th>
+                        <th><strong>Mobile number</strong></th>
+                        <th><strong>Birthday</strong></th>
+                    </tr>
+                    <tr>
+                        <td colspan='7' style='text-align: center;'>No records found.</td>
+                    </tr>
+                </table>";
+                echo $output;
             }
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);

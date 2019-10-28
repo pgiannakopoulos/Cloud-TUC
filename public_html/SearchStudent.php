@@ -30,9 +30,23 @@ require_once "functions.php";
         <?php include 'menu.php'; ?>
         <div class="search-box">
             <input type="text" autocomplete="off" placeholder="Search a Student..." />
-            <div class="result">
-                Result box
-            </div>
+        </div>
+        <div class="result">
+                <table>
+                    <tr>
+                        <th><strong>ID</strong></th>
+                        <th><strong>Name</strong></th>
+                        <th><strong>Surname</strong></th>
+                        <th><strong>Father's name</strong></th>
+                        <th><strong>Grade</strong></th>
+                        <th><strong>Mobile number</strong></th>
+                        <th><strong>Birthday</strong></th>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Search something...</td>
+
+                    </tr>
+                </table>
         </div>
     </body>
 </html>

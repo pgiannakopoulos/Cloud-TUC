@@ -137,7 +137,7 @@ li.dropdown {
 
 .container {
   background-color: #f2f2f2;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
 }
 
 .col-25 {
@@ -255,7 +255,6 @@ li.dropdown {
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
-    padding: 10px;
 }
 
 /* Formatting search box */
@@ -289,8 +288,39 @@ li.dropdown {
   border-top: none;
   cursor: pointer;
 }
-/*.result p:hover{
-  background: #f2f2f2;
-}*/
 
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 0px;
+  margin:0px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.my_table {
+    width: 60%;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+    /*padding: 10px;*/
+}
+
+.my_table h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}

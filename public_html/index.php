@@ -69,7 +69,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username; 
                             $_SESSION["firstname"] = $firstname; 
-                            $_SESSION["surname"] = $surname;                            
+                            $_SESSION["surname"] = $surname;
+                            $_SESSION["array_record"] = array();
+                            $_SESSION["array_pointer"] = 0;                            
                             
                             // Redirect user to welcome page
                             header("location: Teacher.php");
