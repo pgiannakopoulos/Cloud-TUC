@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($err)){
         // Prepare a select statement
-        $sql = "SELECT ID, USERNAME, PASSWORD, NAME, SURNAME FROM Teachers WHERE USERNAME = ?";
+        $sql = "SELECT ID, USERNAME, PASSWORD, NAME, SURNAME, EMAIL FROM Teachers WHERE USERNAME = ?";
         /* create a prepared statement */
  
         if($stmt = mysqli_prepare($link, $sql)){
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $firstname, $surname);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $firstname, $surname, $email);
                     if(mysqli_stmt_fetch($stmt)){
                         // password_verify($password, $hashed_password)
                         if(strcmp($password, $hashed_password) == 0){
@@ -70,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username; 
                             $_SESSION["firstname"] = $firstname; 
                             $_SESSION["surname"] = $surname;
+                            $_SESSION["email"] = $email;
                             $_SESSION["array_record"] = array();
                             $_SESSION["array_pointer"] = 0;                            
                             
@@ -101,10 +102,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <?php include 'includes.php'; ?>
     <title>Login</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="login">

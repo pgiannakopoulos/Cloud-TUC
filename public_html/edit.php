@@ -101,10 +101,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta charset="UTF-8">
+        <?php include 'includes.php'; ?>
         <title>Edit Student</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-        <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
 	<div class="container admin_form">
@@ -162,7 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
 
             <div class="form-group">
-                <input type="submit" value="Sumbit">
+                <input type="submit" value="Sumbit" onclick="return ConfirmEdit()">
             </div>
         </form>
     </div> 

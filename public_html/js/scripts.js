@@ -1,6 +1,14 @@
 function ConfirmDelete() {
-      return confirm('Are you sure you want to do this?');
-    }
+	return confirm('Are you sure you want to delete this student?');
+}
+
+function ConfirmEdit() {
+	return confirm('Are you sure you want to edit this student?');
+}
+
+function ConfirmLogout() {
+	return confirm('Are you sure you want to logout?');
+}
     
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){

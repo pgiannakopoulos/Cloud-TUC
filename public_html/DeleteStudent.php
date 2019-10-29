@@ -19,11 +19,8 @@ require_once "functions.php";
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <?php include 'includes.php'; ?>
         <title>Delete Student</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-        <link href="css/style.css" rel="stylesheet" type="text/css">
-        <script src="js/scripts.js"></script>
     </head>
     <body>
         <?php include 'menu.php'; ?>

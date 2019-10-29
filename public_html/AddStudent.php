@@ -96,10 +96,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <?php include 'includes.php'; ?>
     <title>Add Student</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <?php include 'menu.php'; ?>
@@ -165,31 +163,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div> 
 <div class="container my_table">
     <div class="row">
-            <h2> History </h2>
-            <table>
-                <tr>
-                    <th><strong>ID</strong></th>
-                    <th><strong>Name</strong></th>
-                    <th><strong>Surname</strong></th>
-                </tr>
-                <?php
-                if (count($added_students) > 0) {
-                    for ($i=0; $i < count($added_students) ; $i++) { 
-                        echo "<tr>";
-                        echo "<td>".$added_students[$i][0]."</td>";
-                        echo "<td>".$added_students[$i][1]."</td>";
-                        echo "<td>".$added_students[$i][2]."</td>";
-                        echo "</tr>";
-                    }    
-                }else{
-                    echo "<tr>";
-                    echo "<td> - </td>";
-                    echo "<td> - </td>";
-                    echo "<td> - </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </table>
+        <?php include 'student_records.php'; ?>
     </div>
 </div>
 
