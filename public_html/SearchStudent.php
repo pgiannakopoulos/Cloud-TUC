@@ -25,7 +25,7 @@ require_once "functions.php";
     <body>
         <?php include 'menu.php'; ?>
         <div class="search-box">
-            <input type="text" autocomplete="off" placeholder="Search a Student..." />
+            <input type="text" autocomplete="off" placeholder="Search a Student by id, name, surname or father's name..." />
         </div>
         <div class="result my_table">
                 <table>

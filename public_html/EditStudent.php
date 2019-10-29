@@ -46,7 +46,7 @@ require_once "functions.php";
                         echo '<td align="center">'.$row["ID"].'</td>';
                         echo '<td align="center">'.$row["NAME"].'</td>';
                         echo '<td align="center">'.$row["SURNAME"].'</td>';
-                        echo '<td align="center"><a href="edit.php?id='.$row["ID"].'">Edit</a></td>';
+                        echo '<td align="center"><a href="edit.php?id='.$row["ID"].'"><i class="fas fa-edit"></i></a></td>';
                     echo "</tr>";
                     } 
                 }

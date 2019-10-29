@@ -1,4 +1,3 @@
-<h2> History </h2>
 <table>
     <tr>
         <th><strong>ID</strong></th>

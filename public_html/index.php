@@ -71,6 +71,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["firstname"] = $firstname; 
                             $_SESSION["surname"] = $surname;
                             $_SESSION["email"] = $email;
+
+                            //Initialize history table for students adds
                             $_SESSION["array_record"] = array();
                             $_SESSION["array_pointer"] = 0;                            
                             
@@ -105,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include 'includes.php'; ?>
     <title>Login</title>
 </head>
-<body>
+<body class="login_screen">
     <div class="login">
         <h1>Login</h1>
         <p>Please fill in your credentials to login.</p>

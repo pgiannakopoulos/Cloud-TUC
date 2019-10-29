@@ -11,11 +11,21 @@ body {
     margin:0px;
 }
 
+.login_screen{
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: cover;
+ background-position: top;
+ background-image:url(http://bit.ly/2gPLxZ4);
+}
+
+
 .login {
   	width: 400px;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 100px auto;
+    z-index: 1;
 }
 .login h1 {
   	text-align: center;
@@ -135,35 +145,6 @@ li.dropdown {
 }
 
 
-.container {
-  background-color: #f2f2f2;
-  padding: 20px 20px 40px 20px;
-}
-
-.col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-}
-.col-50 {
-  float: left;
-  width: 50%;
-  margin-top: 6px;
-}
-
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .button {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -249,6 +230,10 @@ li.dropdown {
   background-color: #45a049;
 }
 
+.admin_form .col-md-9 {
+  margin-bottom: 10px;
+}
+
 .notifier{
   text-align: center;
   margin-top: 15px;
@@ -269,11 +254,13 @@ li.dropdown {
   /*box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);*/
   margin: 100px auto;
 }
-.search-box input[type="text"]{
-  height: 32px;
-  padding: 5px 10px;
-  border: 1px solid #CCCCCC;
-  font-size: 14px;
+.search-box input{
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f1f1f1;
+  width: 100%;
 }
 
 .result{      
@@ -329,3 +316,13 @@ th {
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
 }
+
+.general_info .container-fluid{
+  background-color: #ffffff;
+  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  margin-top: 50px;
+  min-height: 155px;
+
+}
+
+

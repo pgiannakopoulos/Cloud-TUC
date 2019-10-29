@@ -10,10 +10,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-// //The htmlspecialchars() function converts special characters to HTML entities. This means that it will replace HTML characters like < and > with &lt; and &gt;. This prevents attackers from exploiting the code by injecting HTML or Javascript code (Cross-site Scripting attacks) in forms.
-// $firstname = htmlspecialchars($_SESSION["firstname"]); //
-// $surname = htmlspecialchars($_SESSION["surname"]);
- require_once 'config.php';
+require_once 'config.php';
 
  ?>
 
@@ -25,33 +22,42 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <?php include 'menu.php'; ?>
-    <div class="container my_table">
+    <div class="container general_info">
         <div class="row">
-            <h2>Personal Information</h2>
-            <div class="col-50"><strong>ID: </strong></div>
-            <div class="col-50"><?php echo $id_th; ?></div>
+            <div class="col-md-6">
+                <div class="container-fluid">
+                    <h2>Personal Information</h2>
+                    <div class="row">
+                        <div class="col-xs-6"><strong>ID: </strong></div>
+                        <div class="col-xs-6"><?php echo $id_th; ?></div>
 
-            <div class="col-50"><strong>Name: </strong></div>
-            <div class="col-50"><?php echo $firstname_th; ?></div>
+                        <div class="col-xs-6"><strong>Name: </strong></div>
+                        <div class="col-xs-6"><?php echo $firstname_th; ?></div>
 
-            <div class="col-50"><strong>surname_th: </strong></div>
-            <div class="col-50"><?php echo $firstname_th; ?></div>
+                        <div class="col-xs-6"><strong>surname_th: </strong></div>
+                        <div class="col-xs-6"><?php echo $firstname_th; ?></div>
 
-            <div class="col-50"><strong>Username: </strong></div>
-            <div class="col-50"><?php echo $username_th; ?></div>
+                        <div class="col-xs-6"><strong>Username: </strong></div>
+                        <div class="col-xs-6"><?php echo $username_th; ?></div>
 
-            <div class="col-50"><strong>e-mail: </strong></div>
-            <div class="col-50"><?php echo $email_th; ?></div>
+                        <div class="col-xs-6"><strong>e-mail: </strong></div>
+                        <div class="col-xs-6"><?php echo $email_th; ?></div>
 
-            <div class="col-50"><strong>e-mail: </strong></div>
-            <div class="col-50">********</div>
-            
+                        <div class="col-xs-6"><strong>password: </strong></div>
+                        <div class="col-xs-6">********</div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="container-fluid">
+                    <h2> History </h2>
+                    <div class="row">
+                        <?php include 'student_records.php'; ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container my_table">
-    <div class="row">
-        <?php include 'student_records.php'; ?>
-    </div>
-</div>
 </body>
 </html>

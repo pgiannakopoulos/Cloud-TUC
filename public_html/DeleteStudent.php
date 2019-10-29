@@ -46,7 +46,7 @@ require_once "functions.php";
                         echo '<td align="center">'.$row["ID"].'</td>';
                         echo '<td align="center">'.$row["NAME"].'</td>';
                         echo '<td align="center">'.$row["SURNAME"].'</td>';
-                        echo '<td align="center"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" >Delete</a></td>';
+                        echo '<td align="center"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" ><i class="fa fa-trash"></i></a></td>';
                     echo "</tr>";
                     } 
                 }
