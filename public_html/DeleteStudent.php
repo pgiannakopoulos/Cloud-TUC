@@ -28,10 +28,10 @@ require_once "functions.php";
             <table>
                 <thead>
                     <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Surname</strong></th>
-                        <th><strong>Action</strong></th>
+                        <th style="width: 23%;"><strong>ID</strong></th>
+                        <th style="width: 23%;"><strong>Name</strong></th>
+                        <th style="width: 23%;"><strong>Surname</strong></th>
+                        <th style="width: 8%; text-align: center;"><strong>Action</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,10 +43,10 @@ require_once "functions.php";
                 if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) { 
                     echo "<tr>";
-                        echo '<td align="center">'.$row["ID"].'</td>';
-                        echo '<td align="center">'.$row["NAME"].'</td>';
-                        echo '<td align="center">'.$row["SURNAME"].'</td>';
-                        echo '<td align="center"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" ><i class="fa fa-trash"></i></a></td>';
+                        echo '<td style="width: 23%;">'.$row["ID"].'</td>';
+                        echo '<td style="width: 23%;">'.$row["NAME"].'</td>';
+                        echo '<td style="width: 23%;">'.$row["SURNAME"].'</td>';
+                        echo '<td style="width: 8%; text-align: center;"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" ><i class="fa fa-trash"></i></a></td>';
                     echo "</tr>";
                     } 
                 }

@@ -164,6 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div> 
 <div class="container my_table">
     <div class="row">
+        <h1>Student Records</h1>
         <?php include 'student_records.php'; ?>
     </div>
 </div>
