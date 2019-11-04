@@ -35,37 +35,37 @@ if(isset($_REQUEST["term"])){
             if(mysqli_num_rows($result) > 0){
                 $output = "<table>
                     <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Surname</strong></th>
-                        <th><strong>Father's name</strong></th>
-                        <th><strong>Grade</strong></th>
-                        <th><strong>Mobile number</strong></th>
-                        <th><strong>Birthday</strong></th>
+                        <th style='width: 15%'><strong>ID</strong></th>
+                        <th style='width: 15%'><strong>Name</strong></th>
+                        <th style='width: 15%'><strong>Surname</strong></th>
+                        <th style='width: 15%'><strong>Father's name</strong></th>
+                        <th style='width: 10%'><strong>Grade</strong></th>
+                        <th style='width: 15%'><strong>Mobile number</strong></th>
+                        <th style='width: 15%'><strong>Birthday</strong></th>
                     </tr>";
                 // Fetch result rows as an associative array
                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                    $output.= '<tr>
-                                <td>'.$row["ID"].'</td>
-                                <td>'.$row["NAME"].'</td>
-                                <td>'.$row["SURNAME"].'</td>
-                                <td>'.$row["FATHERNAME"].'</td>
-                                <td>'.$row["GRADE"].'</td>
-                                <td>'.$row["MOBILENUMBER"].'</td>
-                                <td>'.$row["Birthday"].'</td>
-                            </tr>';
+                    $output.= "<tr>
+                                <td style='width: 15%'>".$row["ID"]."</td>
+                                <td style='width: 15%'>".$row["NAME"]."</td>
+                                <td style='width: 15%'>".$row["SURNAME"]."</td>
+                                <td style='width: 15%'>".$row["FATHERNAME"]."</td>
+                                <td style='width: 10%'>".$row["GRADE"]."</td>
+                                <td style='width: 15%'>".$row["MOBILENUMBER"]."</td>
+                                <td style='width: 15%'>".$row["Birthday"]."</td>
+                            </tr>";
                 }
                 echo $output;
             } else{
                 $output = "<table>
                     <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Surname</strong></th>
-                        <th><strong>Father's name</strong></th>
-                        <th><strong>Grade</strong></th>
-                        <th><strong>Mobile number</strong></th>
-                        <th><strong>Birthday</strong></th>
+                        <th style='width: 15%'><strong>ID</strong></th>
+                        <th style='width: 15%'><strong>Name</strong></th>
+                        <th style='width: 15%'><strong>Surname</strong></th>
+                        <th style='width: 15%'><strong>Father's name</strong></th>
+                        <th style='width: 10%'><strong>Grade</strong></th>
+                        <th style='width: 15%'><strong>Mobile number</strong></th>
+                        <th style='width: 15%'><strong>Birthday</strong></th>
                     </tr>
                     <tr>
                         <td colspan='7' style='text-align: center;'>No records found.</td>

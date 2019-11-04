@@ -51,4 +51,5 @@ require_once "functions.php";
             </table>
         </div>
     </body>
+    <!-- <?php include 'footer.php'; ?>  -->
 </html>

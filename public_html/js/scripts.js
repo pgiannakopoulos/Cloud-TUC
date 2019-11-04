@@ -17,13 +17,13 @@ $(document).ready(function(){
         var resultDropdown = $(".result");
         var default_table = "<table>\
                     <tr>\
-                        <th><strong>ID</strong></th>\
-                        <th><strong>Name</strong></th>\
-                        <th><strong>Surname</strong></th>\
-                        <th><strong>Father's name</strong></th>\
-                        <th><strong>Grade</strong></th>\
-                        <th><strong>Mobile number</strong></th>\
-                        <th><strong>Birthday</strong></th>\
+                        <th style='width: 15%'><strong>ID</strong></th>\
+                        <th style='width: 15%'><strong>Name</strong></th>\
+                        <th style='width: 15%'><strong>Surname</strong></th>\
+                        <th style='width: 15%'><strong>Father's name</strong></th>\
+                        <th style='width: 10%'><strong>Grade</strong></th>\
+                        <th style='width: 15%'><strong>Mobile number</strong></th>\
+                        <th style='width: 15%'><strong>Birthday</strong></th>\
                     </tr>\
                     <tr>\
                         <td colspan='7' style='text-align: center;'>Search something...</td>\
@@ -45,4 +45,14 @@ $(document).ready(function(){
     //     $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
     //     $(this).parent(".result").empty();
     // });
+});
+
+$(window).on("load", function () {
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var element = document.getElementByTag('body');
+        var height = element.offsetHeight;
+        if (height < screen.height) {
+            document.getElementById("footer").classList.add('stikybottom');
+        }
+    }, false);
 });

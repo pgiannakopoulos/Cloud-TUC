@@ -41,26 +41,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($err)){
         // Prepare a select statement
         $sql = "SELECT ID, USERNAME, PASSWORD, NAME, SURNAME, EMAIL FROM Teachers WHERE USERNAME = ?";
+
         /* create a prepared statement */
- 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
             // Set parameters
             $param_username = $username;
+            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
+                
                 // Store result
                 mysqli_stmt_store_result($stmt);
                 
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
+                    
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $firstname, $surname, $email);
                     if(mysqli_stmt_fetch($stmt)){
+                        
                         // password_verify($password, $hashed_password)
                         if(strcmp($password, $hashed_password) == 0){
+                            
                             // Password is correct, so start a new session
                             session_start();
                             
@@ -111,7 +116,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="login">
         <h1>Login</h1>
         <p>Please fill in your credentials to login.</p>
-        <!-- The $_SERVER["PHP_SELF"] is a super global variable that returns the filename of the currently executing script. -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <label for="username">
                     <i class="fas fa-user"></i>
@@ -126,6 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </form>
         <div class="help-block"><?php echo $err; ?></div>
-    </div>    
+    </div>
+    <!-- <?php include 'footer.php'; ?>     -->
 </body>
 </html>

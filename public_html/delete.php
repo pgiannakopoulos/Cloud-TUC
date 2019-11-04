@@ -24,7 +24,4 @@ if (mysqli_query($link, $sql)) {
 } else {
     echo "Error deleting record: " . mysqli_error($conn);
 }
-
-
-
 ?>

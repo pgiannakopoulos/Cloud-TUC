@@ -34,8 +34,8 @@ require_once 'config.php';
                         <div class="col-xs-6"><strong>Name: </strong></div>
                         <div class="col-xs-6"><?php echo $firstname_th; ?></div>
 
-                        <div class="col-xs-6"><strong>surname_th: </strong></div>
-                        <div class="col-xs-6"><?php echo $firstname_th; ?></div>
+                        <div class="col-xs-6"><strong>Surname: </strong></div>
+                        <div class="col-xs-6"><?php echo $surname_th; ?></div>
 
                         <div class="col-xs-6"><strong>Username: </strong></div>
                         <div class="col-xs-6"><?php echo $username_th; ?></div>
@@ -60,4 +60,5 @@ require_once 'config.php';
         </div>
     </div>
 </body>
+<!-- <?php include 'footer.php'; ?>  -->
 </html>

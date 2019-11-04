@@ -168,6 +168,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <?php include 'student_records.php'; ?>
     </div>
 </div>
-
+<!-- <?php include 'footer.php'; ?>  -->
 </body>
 </html>

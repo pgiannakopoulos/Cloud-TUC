@@ -30,13 +30,13 @@ require_once "functions.php";
         <div class="result my_table">
                 <table>
                     <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Surname</strong></th>
-                        <th><strong>Father's name</strong></th>
-                        <th><strong>Grade</strong></th>
-                        <th><strong>Mobile number</strong></th>
-                        <th><strong>Birthday</strong></th>
+                        <th style="width: 15%"><strong>ID</strong></th>
+                        <th style="width: 15%"><strong>Name</strong></th>
+                        <th style="width: 15%"><strong>Surname</strong></th>
+                        <th style="width: 15%"><strong>Father's name</strong></th>
+                        <th style="width: 10%"><strong>Grade</strong></th>
+                        <th style="width: 15%"><strong>Mobile number</strong></th>
+                        <th style="width: 15%"><strong>Birthday</strong></th>
                     </tr>
                     <tr>
                         <td colspan="7" style="text-align: center;">Search something...</td>
@@ -45,4 +45,5 @@ require_once "functions.php";
                 </table>
         </div>
     </body>
+    <!-- <?php include 'footer.php'; ?>  -->
 </html>

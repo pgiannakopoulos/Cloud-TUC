@@ -1,15 +1,33 @@
+@font-face {
+  font-family: 'Cairo';
+  src: url(../fonts/Cairo/Cairo-Regular.ttf);
+}
+
 * {
   	box-sizing: border-box;
-  	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+  	font-family: 'Cairo', sans-serif;
   	font-size: 16px;
-  	-webkit-font-smoothing: antialiased;
-  	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  	background-color: #435165;
+  	background-color: #006c82;
     margin:0px;
 }
+
+.content{
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+/*.footer {
+  position: absolute;
+  bottom:0;
+  width:100%;
+  height:60px;
+  background-color: #efefef;
+  text-align: center;
+}
+*/
+/*Login Screen*/
 
 .login_screen{
  background-repeat: no-repeat;
@@ -19,7 +37,6 @@ body {
  background-image:url(http://bit.ly/2gPLxZ4);
 }
 
-
 .login {
   	width: 400px;
   	background-color: #ffffff;
@@ -27,6 +44,7 @@ body {
   	margin: 100px auto;
     z-index: 1;
 }
+
 .login h1 {
   	text-align: center;
   	color: #5b6574;
@@ -45,15 +63,17 @@ body {
   	justify-content: center;
   	padding-top: 20px;
 }
+
 .login form label {
   	display: flex;
   	justify-content: center;
   	align-items: center;
   	width: 50px;
   	height: 50px;
-  	background-color: #3274d6;
+  	background-color: #006c82;
   	color: #ffffff;
 }
+
 .login form input[type="password"], .login form input[type="text"] {
   	width: 310px;
   	height: 50px;
@@ -61,17 +81,19 @@ body {
   	margin-bottom: 20px;
   	padding: 0 15px;
 }
+
 .login form input[type="submit"] {
   	width: 100%;
-  	padding: 15px;
- 	margin-top: 20px;
-  	background-color: #3274d6;
+  	padding: 10px;
+ 	  margin-top: 20px;
+  	background-color: #006c82;
   	border: 0;
   	cursor: pointer;
   	font-weight: bold;
   	color: #ffffff;
   	transition: background-color 0.2s;
 }
+
 .login form input[type="submit"]:hover {
 	background-color: #2868c7;
   	transition: background-color 0.2s;
