@@ -23,7 +23,7 @@ $sql='SELECT * FROM Students WHERE ID="'.$id.'";';
 $result = mysqli_query($link, $sql);
 $row = mysqli_fetch_assoc($result);
 if (mysqli_num_rows($result) <= 0) {
-	echo "ERROR";
+	echo "ERROR ".$id." df";
 }
 
 $name = $row['NAME'];
@@ -115,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <label for="id">ID</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" name="id" id="id" placeholder="1234" value="<?php echo $id; ?>" disabled>
+                        <input type="text" name="id" id="id" placeholder="1234" value="<?php echo $id; ?>" readonly>
                     </div>
 
                     <div class="col-md-3">

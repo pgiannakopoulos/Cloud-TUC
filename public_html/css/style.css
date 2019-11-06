@@ -34,7 +34,7 @@ body {
  background-attachment: fixed;
  background-size: cover;
  background-position: top;
- background-image:url(http://bit.ly/2gPLxZ4);
+ background-image:url(../images/login_img.jpg);
 }
 
 .login {
@@ -103,6 +103,10 @@ body {
   text-align: center;
   color:red;
   padding: 10px;
+}
+
+.login .fas{
+  color: white;
 }
 
 /*Navigation Bar*/
@@ -253,6 +257,11 @@ li.dropdown {
   background-color: #45a049;
 }
 
+input[readonly] {
+  cursor: not-allowed;
+  background-color: #0000002b;
+}
+
 .admin_form .col-md-9 {
   margin-bottom: 10px;
 }
@@ -273,10 +282,9 @@ li.dropdown {
 /* Formatting search box */
 .search-box{
   width: 60%;
-  /*background-color: #ffffff;*/
-  /*box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);*/
   margin: 100px auto;
 }
+
 .search-box input{
   border: 1px solid transparent;
   background-color: #f1f1f1;
@@ -349,3 +357,11 @@ th {
 }
 
 
+/*Icons colors*/
+.fas, .fa{
+  color: #356f5e9e;
+}
+
+.fas:hover, .fa:hover{
+  color: #356f5e;
+}
