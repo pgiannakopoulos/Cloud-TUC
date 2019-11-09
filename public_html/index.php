@@ -114,6 +114,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body class="login_screen">
     <div class="login">
+        <img class="logo1" src="images/tuc_logo.png">
+        <i class="logo2 fa fa-database"></i>
         <h1>Login</h1>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

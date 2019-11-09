@@ -43,6 +43,25 @@ body {
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 100px auto;
     z-index: 1;
+    position: relative;
+}
+
+.logo1{
+  max-width: 40px;
+  position: absolute;
+  opacity: 0.6;
+  left: 20px;
+  top:10px
+}
+
+.logo2{
+  font-size: 50px;
+  position: absolute;
+  opacity: 0.6;
+  color:#006c82 !important;
+  right: 20px;
+  top:15px;
+
 }
 
 .login h1 {
@@ -351,9 +370,16 @@ th {
 .general_info .container-fluid{
   background-color: #ffffff;
   box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-  margin-top: 50px;
-  min-height: 155px;
+  margin-top: 25px;
+}
 
+.general_info h2{
+  text-shadow: 0 0 3px #085c6ee3;
+  text-align: center;
+  color: #5b6574;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid #dee0e4;
 }
 
 

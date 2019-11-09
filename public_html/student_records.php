@@ -5,6 +5,9 @@
         <th><strong>Surname</strong></th>
     </tr>
 <?php
+
+$added_students = $_SESSION["array_record"];
+
 if (count($added_students) > 0) {
     for ($i=0; $i < count($added_students) ; $i++) { 
         echo "<tr>";

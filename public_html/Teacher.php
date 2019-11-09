@@ -12,6 +12,39 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 require_once 'config.php';
 
+//Count Teachers
+$sql = 'SELECT COUNT(ID) AS TH_NUM FROM Teachers';
+$result = mysqli_query($link, $sql);
+$teacher_num = 0;
+
+if (mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    $teacher_num = $data['TH_NUM'];
+}
+
+//Count Students
+$sql = 'SELECT COUNT(ID) AS ST_NUM FROM Students';
+$result = mysqli_query($link, $sql);
+$student_num = 0;
+
+if (mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    $student_num = $data['ST_NUM'];
+}
+
+//Count Students
+$sql = 'SELECT AVG(GRADE) AS AVERAGE FROM Students';
+$result = mysqli_query($link, $sql);
+$grade_avg = "-";
+
+if (mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    $grade_avg = $data['AVERAGE'];
+}
+
+
+
+
  ?>
 
 <!DOCTYPE html>
@@ -25,7 +58,7 @@ require_once 'config.php';
     <div class="container general_info">
         <div class="row">
             <div class="col-md-6">
-                <div class="container-fluid">
+                <div class="container-fluid info">
                     <h2>Personal Information</h2>
                     <div class="row">
                         <div class="col-xs-6"><strong>ID: </strong></div>
@@ -49,7 +82,33 @@ require_once 'config.php';
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-md-6">
+                <div class="container-fluid stats">
+                    <h2>System Status</h2>
+                    <div class="row">
+                        <div class="col-xs-6"><strong>Day: </strong></div>
+                        <div class="col-xs-6"><?php echo date("l"); ?></div>
+
+                        <div class="col-xs-6"><strong>Date: </strong></div>
+                        <div class="col-xs-6"><?php echo date("d/m/Y"); ?></div>
+
+                        <div class="col-xs-6"><strong>Timestamp: </strong></div>
+                        <div class="col-xs-6"><?php echo date("h:i:sa"); ?></div>  
+                        
+                        <div class="col-xs-6"><strong>Teachers Records: </strong></div>
+                        <div class="col-xs-6"><?php echo $teacher_num; ?></div>
+
+                        <div class="col-xs-6"><strong>Students Records: </strong></div>
+                        <div class="col-xs-6"><?php echo $student_num; ?></div>
+
+                        <div class="col-xs-6"><strong>Grade Average: </strong></div>
+                        <div class="col-xs-6"><?php echo $grade_avg."/10"; ?></div>     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
                 <div class="container-fluid">
                     <h2> History </h2>
                     <div class="row">
