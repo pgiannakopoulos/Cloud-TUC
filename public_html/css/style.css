@@ -8,33 +8,73 @@
   	font-family: 'Cairo', sans-serif;
   	font-size: 16px;
 }
+html,
+body {
+  position: relative;
+  min-height: 100%;
+  margin:0px;
+  padding: 0px;
+}
 
 body {
   	background-color: #006c82;
-    margin:0px;
+    position: relative;
 }
 
-.content{
-   padding-bottom:60px;   /* Height of the footer */
+
+#content{
+  position: relative;
+  padding: 1px;
 }
 
-/*.footer {
-  position: absolute;
-  bottom:0;
+#footer {
   width:100%;
-  height:60px;
-  background-color: #efefef;
+  height:40px;
+  background-color: #333;
+  color: white;
   text-align: center;
+  overflow:hidden;
+  display : flex;
+  align-items : center;
 }
-*/
+
+.footer_text{
+  text-align: center;
+  margin:auto;
+}
+
+/* unvisited link */
+.footer_text a:link {
+  color: white;
+  text-decoration: none;
+}
+/* visited link */
+.footer_text a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+/* mouse over link */
+.footer_text a:hover {
+  color: #056b80;
+  text-decoration: none;
+}
+
+/* selected link */
+.footer_text a:active {
+  color: white;
+  text-decoration: none;
+}
+
+
 /*Login Screen*/
 
 .login_screen{
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
- background-position: top;
- background-image:url(../images/login_img.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+  background-image:url(../images/login_img.jpg);
 }
 
 .login {
@@ -49,19 +89,18 @@ body {
 .logo1{
   max-width: 40px;
   position: absolute;
-  opacity: 0.6;
+  opacity: 0.8;
   left: 20px;
   top:10px
 }
 
 .logo2{
-  font-size: 50px;
+  max-width: 55px;
   position: absolute;
-  opacity: 0.6;
+  opacity: 0.8;
   color:#006c82 !important;
   right: 20px;
   top:15px;
-
 }
 
 .login h1 {
@@ -351,15 +390,21 @@ th {
   color: white;
 }
 
-.my_table {
-    width: 60%;
+.my_table, .my_table_60 {
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
-    /*padding: 10px;*/
 }
 
-.my_table h1 {
+.my_table {
+    width: 100%;
+}
+
+.my_table_60 {
+    width: 60%;
+}
+
+.my_table_60 h1 {
     text-align: center;
     color: #5b6574;
     font-size: 24px;

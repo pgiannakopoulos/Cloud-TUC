@@ -7,16 +7,18 @@ $username_th = htmlspecialchars($_SESSION["username"]);
 $email_th = htmlspecialchars($_SESSION["email"]);
 
 ?>
-<ul class="topnav">
-    <li><a class="active" href="Teacher.php">Dashboard</a></li>
-    <li><a href="AddStudent.php">Add</a></li>
-    <li><a href="EditStudent.php">Edit</a></li>
-    <li><a href="DeleteStudent.php">Delete</a></li>
-    <li><a href="SearchStudent.php">Search</a></li>
-    <li style="float:right" class="dropdown">
-    <a class="dropbtn"><?php echo $firstname_th." ".$surname_th; ?></a>
-        <div class="dropdown-content">
-            <a href="logout.php" onclick="return ConfirmLogout()">logout</a>
-        </div>
-    </li>
-</ul>
+<div id="header">
+    <ul class="topnav">
+        <li><a class="active" href="Teacher.php">Dashboard</a></li>
+        <li><a href="AddStudent.php">Add</a></li>
+        <li><a href="EditStudent.php">Edit</a></li>
+        <li><a href="DeleteStudent.php">Delete</a></li>
+        <li><a href="SearchStudent.php">Search</a></li>
+        <li style="float:right" class="dropdown">
+        <a class="dropbtn"><?php echo $firstname_th." ".$surname_th; ?></a>
+            <div class="dropdown-content">
+                <a href="logout.php" onclick="return ConfirmLogout()">logout</a>
+            </div>
+        </li>
+    </ul>
+</div>

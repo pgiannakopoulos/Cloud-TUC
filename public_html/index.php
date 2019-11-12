@@ -112,27 +112,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include 'includes.php'; ?>
     <title>Login</title>
 </head>
-<body class="login_screen">
-    <div class="login">
-        <img class="logo1" src="images/tuc_logo.png">
-        <i class="logo2 fa fa-database"></i>
-        <h1>Login</h1>
-        <p>Please fill in your credentials to login.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <label for="username">
-                    <i class="fas fa-user"></i>
-                </label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>"placeholder="Username" id="username" required>  
-                <label for="password">
-                    <i class="fas fa-lock"></i>
-                </label>
-                <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
-            <div class="form-group">
-                <input type="submit" value="Sumbit">
-            </div>
-        </form>
-        <div class="help-block"><?php echo $err; ?></div>
+<body>
+    <div id="header"></div>
+    <div id="content" class="login_screen">
+        <div class="login">
+            <img class="logo1" src="images/tuc_logo.png">
+            <img class="logo2" src="images/system_logo.png">
+            <!-- <i class="logo2 fa fa-database"></i> -->
+            <h1>Login</h1>
+            <p>Please fill in your credentials to login.</p>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                    </label>
+                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>"placeholder="Username" id="username" required>  
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                    </label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+                <div class="form-group">
+                    <input type="submit" value="Sumbit">
+                </div>
+            </form>
+            <div class="help-block"><?php echo $err; ?></div>
+        </div>
     </div>
-    <!-- <?php include 'footer.php'; ?>     -->
+    <?php include 'footer.php'; ?>    
 </body>
 </html>

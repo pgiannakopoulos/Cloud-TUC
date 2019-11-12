@@ -24,26 +24,28 @@ require_once "functions.php";
     </head>
     <body>
         <?php include 'menu.php'; ?>
-        <div class="search-box">
-            <input type="text" autocomplete="off" placeholder="Search a Student by id, name, surname or father's name..." />
-        </div>
-        <div class="result my_table">
-                <table>
-                    <tr>
-                        <th style="width: 15%"><strong>ID</strong></th>
-                        <th style="width: 15%"><strong>Name</strong></th>
-                        <th style="width: 15%"><strong>Surname</strong></th>
-                        <th style="width: 15%"><strong>Father's name</strong></th>
-                        <th style="width: 10%"><strong>Grade</strong></th>
-                        <th style="width: 15%"><strong>Mobile number</strong></th>
-                        <th style="width: 15%"><strong>Birthday</strong></th>
-                    </tr>
-                    <tr>
-                        <td colspan="7" style="text-align: center;">Search something...</td>
+        <div id="content">
+            <div class="search-box">
+                <input type="text" autocomplete="off" placeholder="Search a Student by id, name, surname or father's name..." />
+            </div>
+            <div class="result my_table_60">
+                    <table>
+                        <tr>
+                            <th style="width: 15%"><strong>ID</strong></th>
+                            <th style="width: 15%"><strong>Name</strong></th>
+                            <th style="width: 15%"><strong>Surname</strong></th>
+                            <th style="width: 15%"><strong>Father's name</strong></th>
+                            <th style="width: 10%"><strong>Grade</strong></th>
+                            <th style="width: 15%"><strong>Mobile number</strong></th>
+                            <th style="width: 15%"><strong>Birthday</strong></th>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">Search something...</td>
 
-                    </tr>
-                </table>
+                        </tr>
+                    </table>
+            </div>
         </div>
     </body>
-    <!-- <?php include 'footer.php'; ?>  -->
+    <?php include 'footer.php'; ?> 
 </html>

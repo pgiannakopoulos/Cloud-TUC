@@ -47,13 +47,21 @@ $(document).ready(function(){
     // });
 });
 
-$(window).on("load", function () {
-    document.addEventListener("DOMContentLoaded", function (event) {
-        var element = document.getElementByTag('body');
-        var height = element.offsetHeight;
-        if (height < screen.height) {
-            document.getElementById("footer").classList.add('stikybottom');
-        }
-    }, false);
-});
+ // function to set the height on fly
+ function autoHeight() {
+   $('#content').css('min-height', 0);
+   $('#content').css('min-height', (
+     $(document).height() - $('#header').height() - $('#footer').height()
+   ));
+ }
+
+ // onDocumentReady function bind
+ $(document).ready(function() {
+   autoHeight();
+ });
+
+ // onResize bind of the function
+ $(window).resize(function() {
+   autoHeight();
+ });
 
