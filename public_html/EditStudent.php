@@ -33,8 +33,8 @@ require_once "functions.php";
                         <th style="width: 8%; text-align: center;"><strong>Action</strong></th>
                      </tr>
                 <?php
-                // Show all student in the database
                 
+                // Show all student in the database
                 $sql="SELECT ID, NAME, SURNAME FROM Students ORDER BY ID DESC;";
                 $result = mysqli_query($link,$sql);
 

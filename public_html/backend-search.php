@@ -11,16 +11,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-// Include config file
 require_once "config.php";
 require_once "functions.php";
 
  
 if(isset($_REQUEST["term"])){
+
     // Prepare a select statement
     $sql = "SELECT * FROM Students WHERE ID LIKE ? OR NAME LIKE ? OR SURNAME LIKE ? OR FATHERNAME LIKE ?"  ;
     
     if($stmt = mysqli_prepare($link, $sql)){
+
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "ssss", $param_term,$param_term,$param_term,$param_term);
         
@@ -31,7 +32,7 @@ if(isset($_REQUEST["term"])){
         if(mysqli_stmt_execute($stmt)){
             $result = mysqli_stmt_get_result($stmt);
             
-            // Check number of rows in the result set
+            // Check the number of rows in the result set
             if(mysqli_num_rows($result) > 0){
                 $output = "<table>
                     <tr>
@@ -43,6 +44,7 @@ if(isset($_REQUEST["term"])){
                         <th style='width: 15%'><strong>Mobile number</strong></th>
                         <th style='width: 15%'><strong>Birthday</strong></th>
                     </tr>";
+
                 // Fetch result rows as an associative array
                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                     $output.= "<tr>

@@ -1,3 +1,4 @@
+/*Set the font*/
 @font-face {
   font-family: 'Cairo';
   src: url(../fonts/Cairo/Cairo-Regular.ttf);
@@ -48,6 +49,7 @@ body {
   color: white;
   text-decoration: none;
 }
+
 /* visited link */
 .footer_text a:visited {
   color: white;
@@ -64,6 +66,15 @@ body {
 .footer_text a:active {
   color: white;
   text-decoration: none;
+}
+
+/*Icons colors*/
+.fas, .fa{
+  color: #356f5e9e;
+}
+
+.fas:hover, .fa:hover{
+  color: #356f5e;
 }
 
 
@@ -168,7 +179,7 @@ body {
 }
 
 /*Navigation Bar*/
-ul {
+#header ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -176,11 +187,11 @@ ul {
   background-color: #333;
 }
 
-li {
+#header li {
   float: left;
 }
 
-li a, .dropbtn {
+#header li a, #header .dropbtn {
   display: inline-block;
   color: white;
   text-align: center;
@@ -188,21 +199,21 @@ li a, .dropbtn {
   text-decoration: none;
 }
 
-li a:hover:not(.active), .dropdown:hover .dropbtn {
+#header li a:hover:not(.active), #header .dropdown:hover #header .dropbtn {
   background-color: #111;
   cursor: pointer;
 }
 
-.active {
+#header .active {
   background-color: #4CAF50;
 }
 
 
-li.dropdown {
+#header li.dropdown {
   display: inline-block;
 }
 
-.dropdown-content {
+#header .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -211,7 +222,7 @@ li.dropdown {
   z-index: 1;
 }
 
-.dropdown-content a {
+#header .dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -219,17 +230,16 @@ li.dropdown {
   text-align: left;
 }
 
-.dropdown-content a:hover {
+#header .dropdown-content a:hover {
   color: #4CAF50 !important;
   background-color: white !important;
 }
 
-.dropdown:hover .dropdown-content {
+#header .dropdown:hover .dropdown-content {
   display: block;
 }
 
-
-.button {
+#header .button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -239,12 +249,12 @@ li.dropdown {
   display: inline-block;
   font-size: 16px;
   margin: 4px 4px;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
   cursor: pointer;
 }
 
-.button_back {
+#header .button_back {
   background-color: white; 
   color: black; 
   border: 2px solid #4CAF50;
@@ -253,10 +263,28 @@ li.dropdown {
   top: 0px;
 }
 
-.button_back:hover {
+#header .button_back:hover {
   background-color: #4CAF50;
   color: white;
 }
+
+
+/*Teacher page info*/
+.general_info .container-fluid{
+  background-color: #ffffff;
+  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  margin-top: 25px;
+}
+
+.general_info h2{
+  text-shadow: 0 0 3px #085c6ee3;
+  text-align: center;
+  color: #5b6574;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid #dee0e4;
+}
+
 
 /*Student forms */
 .admin_form {
@@ -337,6 +365,7 @@ input[readonly] {
     margin: 100px auto;
 }
 
+
 /* Formatting search box */
 .search-box{
   width: 60%;
@@ -361,6 +390,7 @@ input[readonly] {
   width: 100%;
   box-sizing: border-box;
 }
+
 /* Formatting result items */
 .result p{
   margin: 0;
@@ -370,7 +400,7 @@ input[readonly] {
   cursor: pointer;
 }
 
-
+/*Format for tables*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -410,29 +440,4 @@ th {
     font-size: 24px;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
-}
-
-.general_info .container-fluid{
-  background-color: #ffffff;
-  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-  margin-top: 25px;
-}
-
-.general_info h2{
-  text-shadow: 0 0 3px #085c6ee3;
-  text-align: center;
-  color: #5b6574;
-  font-size: 24px;
-  padding: 20px 0 20px 0;
-  border-bottom: 1px solid #dee0e4;
-}
-
-
-/*Icons colors*/
-.fas, .fa{
-  color: #356f5e9e;
-}
-
-.fas:hover, .fa:hover{
-  color: #356f5e;
 }
