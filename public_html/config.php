@@ -1,6 +1,5 @@
 <?php
-/* Database credentials. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
+/* Database credentials*/
 define('DB_SERVER', 'mysql');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'rootpassword');
@@ -15,5 +14,6 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
+/*Set timezone */
 date_default_timezone_set("Europe/Athens");
 ?>

@@ -11,10 +11,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
+//DB connection
 require_once "config.php";
 
 $id=$_REQUEST['id'];
 
+
+//Delete the student record
 $sql='DELETE FROM Students WHERE ID="'.$id.'";';
 
 if (mysqli_query($link, $sql)) {

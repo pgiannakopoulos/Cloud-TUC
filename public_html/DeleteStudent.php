@@ -38,6 +38,8 @@ require_once "functions.php";
                     <tbody>
 
                     <?php
+
+                    // Show all student in the database
                     $sql="SELECT ID, NAME, SURNAME FROM Students ORDER BY ID DESC;";
                     $result = mysqli_query($link,$sql);
 

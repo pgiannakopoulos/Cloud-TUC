@@ -17,8 +17,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once "config.php";
 require_once "functions.php";
 
+//get the argument
 $id=$_REQUEST['id'];
 
+//find the rest of the information
 $sql='SELECT * FROM Students WHERE ID="'.$id.'";';
 $result = mysqli_query($link, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -36,7 +38,8 @@ $birthday = $row['Birthday'];
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+    
+    //Check data for special characters
     $id = secure_input($_POST["id"]);
     $name = secure_input($_POST["name"]);
     $surname = secure_input($_POST["surname"]);
@@ -63,6 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($message)){
+
         // Prepare a select statement
         $sql = 'UPDATE Students SET ID = ?, NAME = ?, SURNAME = ?, FATHERNAME = ?, GRADE = ?, MOBILENUMBER = ?, Birthday = ? WHERE ID="'.$id.'";';
         /* create a prepared statement */
@@ -93,7 +97,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     // Close connection
     mysqli_close($link);
-    //header("location: edit.php?id=".$id);
 }
 
 ?>

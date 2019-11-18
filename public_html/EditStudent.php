@@ -10,7 +10,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-// Include config file
 require_once "config.php";
 require_once "functions.php";
 
@@ -34,6 +33,8 @@ require_once "functions.php";
                         <th style="width: 8%; text-align: center;"><strong>Action</strong></th>
                      </tr>
                 <?php
+                // Show all student in the database
+                
                 $sql="SELECT ID, NAME, SURNAME FROM Students ORDER BY ID DESC;";
                 $result = mysqli_query($link,$sql);
 

@@ -1,3 +1,5 @@
+<!-- Student records table -->
+
 <table>
     <tr>
         <th><strong>ID</strong></th>

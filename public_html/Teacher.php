@@ -10,6 +10,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
+//Database connection
 require_once 'config.php';
 
 //Count Teachers
@@ -32,18 +33,15 @@ if (mysqli_num_rows($result) > 0) {
     $student_num = $data['ST_NUM'];
 }
 
-//Count Students
+//Calculate the average of the grade of all students
 $sql = 'SELECT AVG(GRADE) AS AVERAGE FROM Students';
 $result = mysqli_query($link, $sql);
 $grade_avg = "-";
 
 if (mysqli_num_rows($result) > 0) {
     $data = mysqli_fetch_assoc($result);
-    $grade_avg = $data['AVERAGE'];
+    $grade_avg = round($data['AVERAGE'], 2); ;
 }
-
-
-
 
  ?>
 

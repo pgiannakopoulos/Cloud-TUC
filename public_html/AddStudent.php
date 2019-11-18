@@ -8,6 +8,7 @@ if (!isset($_SESSION)) {
 $message = "";
 $id = $name = $surname = $fathername =  $grade = $mobile_number = $birthday = "";
 
+//Get the history records
 $added_students = $_SESSION["array_record"];
 
 
@@ -17,13 +18,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-// Include config file
 require_once "config.php";
 require_once "functions.php";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
+    //Check data for special characters
     $id = secure_input($_POST["id"]);
     $name = secure_input($_POST["name"]);
     $surname = secure_input($_POST["surname"]);
@@ -32,6 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mobile_number = secure_input($_POST["mobile_number"]);
     $birthday = secure_input($_POST["birthday"]);
 
+    
     //Input format validation
  
     // check if name only contains letters
@@ -50,12 +52,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($message)){
+
         // Prepare a select statement
         $sql = "INSERT INTO Students (ID, NAME, SURNAME, FATHERNAME, GRADE, MOBILENUMBER, Birthday)
         VALUES (?,?,?,?,?,?,?)";
+
         /* create a prepared statement */
- 
         if($stmt = mysqli_prepare($link, $sql)){
+
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sssssss", $param_id, $param_name, $param_surname, $param_fathername, $param_grade, $param_mobile_number, $param_birthday);
             
@@ -71,6 +75,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 $message = '<span style="color:green">You added a student!</span>';
+                
+                //Update the history records
                 $added_students = $_SESSION["array_record"];
                 $p = $_SESSION["array_pointer"];
                 $added_students[$p] = array($id, $name, $surname);

@@ -12,9 +12,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
-require_once "functions.php";
+require_once "functions.php";    //containes the secure_input() function
 
-//require_once "data.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -23,7 +22,7 @@ $err = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    // Check if username is empty
+    // Check if username is empty, remove spaces.
     if(empty(trim($_POST["username"]))){
         $err = "Please enter username.";
     } else{
@@ -109,7 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include 'includes.php'; ?>
+   <!-- Include the css style etc -->
+    <?php include 'includes.php'; ?>   
     <title>Login</title>
 </head>
 <body>
@@ -118,7 +118,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="login">
             <img class="logo1" src="images/tuc_logo.png">
             <img class="logo2" src="images/system_logo.png">
-            <!-- <i class="logo2 fa fa-database"></i> -->
             <h1>Login</h1>
             <p>Please fill in your credentials to login.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

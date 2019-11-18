@@ -10,12 +10,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-// Include config file
 require_once "config.php";
 require_once "functions.php";
 
 ?>
 
+<!-- The search functionality is implemented in scripts.js and backend-seach.php -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
