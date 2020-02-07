@@ -1,0 +1,5 @@
+RewriteEngine On    # Turn on the rewriting engine
+RewriteRule ^students/read/([0-9a-zA-Z_-]*)$ read.php?id=$1 [NC,L]
+RewriteRule ^delete/([0-9]*)$ delete.php?id=$1 [NC,L]
+RewriteRule ^create create.php [NC,L]
+RewriteRule ^update update.php [NC,L]

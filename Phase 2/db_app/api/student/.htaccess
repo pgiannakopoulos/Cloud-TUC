@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteRule ^read/([_0-9a-zA-Z]+)$ readOne.php?id=$1 [NC,L]
+RewriteRule ^read read.php [NC,L]
+RewriteRule ^delete/([0-9]*)$ delete.php?id=$1 [NC,L]
+RewriteRule ^create create.php [NC,L]
+RewriteRule ^update update.php [NC,L]
+RewriteRule ^search/(.*)$  search.php?$1 [NC,L]

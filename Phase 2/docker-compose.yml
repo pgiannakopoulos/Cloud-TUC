@@ -2,7 +2,7 @@ version: "3.1"
 services:
   webserver:
     build: 
-      context: './webserver/'
+      context: './website/'
     volumes:
       - ${PROJECT_ROOT}/:/var/www/html/
     container_name: webserver
@@ -12,7 +12,7 @@ services:
       - "80:80"
   db_service:
     build: 
-      context: './webserver/'
+      context: './db_service/'
     volumes:
       - ./db_app:/var/www/html/
     container_name: db_service
