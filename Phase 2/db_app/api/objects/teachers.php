@@ -66,5 +66,33 @@ class Teacher{
         return false;
          
     }
+
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT ID, USERNAME, PASSWORD, NAME, SURNAME, EMAIL FROM Teachers WHERE USERNAME= ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->username);
+     
+        // execute query
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->id= $row['ID'];
+        $this->name= $row['NAME'];
+        $this->surname= $row['SURNAME'];
+        $this->username= $row['USERNAME'];
+        $this->password= $row['PASSWORD'];
+        $this->email= $row['EMAIL'];
+
+        // echo $stmt->rowCount();
+    }
 }
 ?>

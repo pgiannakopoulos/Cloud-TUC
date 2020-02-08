@@ -146,6 +146,7 @@ class Student{
         $this->id=htmlspecialchars(strip_tags($this->id));
      
         // bind id of record to delete
+        echo "final=".$this->id;
         $stmt->bindParam(1, $this->id);
      
         // execute query

@@ -3,7 +3,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
- 
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: Teacher.php");
@@ -13,7 +13,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 // Include config file
 require_once "config.php";
 require_once "functions.php";    //containes the secure_input() function
-
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -38,70 +37,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($err)){
-        // Prepare a select statement
-        $sql = "SELECT ID, USERNAME, PASSWORD, NAME, SURNAME, EMAIL FROM Teachers WHERE USERNAME = ?";
+        $get_data = callAPI('GET', $db_service.'/api/teacher/read.php?id='.$username, false);
+        if ($get_data) {
+            $response = json_decode($get_data, true);
+            // Check if username exists, if yes then verify password
+            if($response['username']){                    
+                // password_verify($password, $hashed_password)
+                if(strcmp($password, $response['password']) == 0){
+                    // Password is correct, so start a new session
+                    session_start();
+                            
+                    // Store data in session variables
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["id"] = $response['id'];
+                    $_SESSION["username"] = $response['username']; 
+                    $_SESSION["firstname"] = $response['name']; 
+                    $_SESSION["surname"] = $response['surname'];
+                    $_SESSION["email"] = $response['email'];
 
-        /* create a prepared statement */
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                
-                // Store result
-                mysqli_stmt_store_result($stmt);
-                
-                // Check if username exists, if yes then verify password
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $firstname, $surname, $email);
-                    if(mysqli_stmt_fetch($stmt)){
-                        
-                        // password_verify($password, $hashed_password)
-                        if(strcmp($password, $hashed_password) == 0){
+                    //Initialize history table for students adds
+                    $_SESSION["array_record"] = array();
+                    $_SESSION["array_pointer"] = 0;                            
                             
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username; 
-                            $_SESSION["firstname"] = $firstname; 
-                            $_SESSION["surname"] = $surname;
-                            $_SESSION["email"] = $email;
-
-                            //Initialize history table for students adds
-                            $_SESSION["array_record"] = array();
-                            $_SESSION["array_pointer"] = 0;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: Teacher.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $err = "The password you entered was not valid.";
-                        }
-                    }
+                    // Redirect user to welcome page
+                    header("location: Teacher.php");
                 } else{
-                    // Display an error message if username doesn't exist
-                    $err = "No account found with that username.";
+                // Display an error message if password is not valid
+                    $err = "The password you entered was not valid.";
                 }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+            }else{
+                // Display an error message if username doesn't exist
+                $err = "No account found with that username.";
             }
-        }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
+        }else{
+            $err = "Oops! Something went wrong. Please try again later.";
+        }  
     }
-    
-    // Close connection
-   mysqli_close($link);
 }
 ?>
  

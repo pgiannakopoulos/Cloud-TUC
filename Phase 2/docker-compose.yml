@@ -10,6 +10,8 @@ services:
       - db_service
     ports:
       - "80:80"
+    networks:
+       - db_network
   db_service:
     build: 
       context: './db_service/'
@@ -54,5 +56,6 @@ services:
     container_name: phpmyadmin
 networks:
   db_network:
+    external: true
 volumes:
   data2:
