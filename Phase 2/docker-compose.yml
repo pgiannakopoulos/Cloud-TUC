@@ -2,9 +2,9 @@ version: "3.1"
 services:
   webserver:
     build: 
-      context: './website/'
+      context: './services_conf/website/'
     volumes:
-      - ${PROJECT_ROOT}/:/var/www/html/
+      - ./services_depl/public_html/:/var/www/html/
     container_name: webserver
     depends_on:
       - db_service
@@ -14,9 +14,9 @@ services:
        - db_network
   db_service:
     build: 
-      context: './db_service/'
+      context: './services_conf/db_service/'
     volumes:
-      - ./db_app:/var/www/html/
+      - ./services_depl/db_app:/var/www/html/
     container_name: db_service
     depends_on:
       - db
@@ -26,7 +26,7 @@ services:
        - db_network
   db:
     build:
-      context: './mysql/'
+      context: './services_conf/mysql/'
     restart: always
     ports:
       - "3306:3306"
