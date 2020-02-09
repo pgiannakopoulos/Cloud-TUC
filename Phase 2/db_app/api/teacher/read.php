@@ -50,7 +50,7 @@ if (isset($_GET['id'])) {
     }
 }else{
     // query products
-    $stmt = $product->read();
+    $stmt = $teacher->read();
     $num = $stmt->rowCount();
      
     // check if more than 0 record found

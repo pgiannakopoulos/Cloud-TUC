@@ -21,19 +21,15 @@ require_once "functions.php";
 $id=$_REQUEST['id'];
 
 //find the rest of the information
-$sql='SELECT * FROM Students WHERE ID="'.$id.'";';
-$result = mysqli_query($link, $sql);
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows($result) <= 0) {
-	echo "ERROR ".$id." df";
-}
+$get_data = callAPI('GET', $db_service.'/api/student/'.$id, $data);
+$response = json_decode($get_data, true);
 
-$name = $row['NAME'];
-$surname = $row['SURNAME'];
-$fathername =  $row['FATHERNAME'];
-$grade = $row['GRADE'];
-$mobile_number = $row['MOBILENUMBER'];
-$birthday = $row['Birthday'];
+$name = $response['name'];
+$surname = $response['surname'];
+$fathername =  $response['fathername'];
+$grade = $response['grade'];
+$mobile_number = $response['mobilenumber'];
+$birthday = $response['birthday'];
 
 
 // Processing form data when form is submitted
@@ -67,36 +63,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($message)){
 
-        // Prepare a select statement
-        $sql = 'UPDATE Students SET ID = ?, NAME = ?, SURNAME = ?, FATHERNAME = ?, GRADE = ?, MOBILENUMBER = ?, Birthday = ? WHERE ID="'.$id.'";';
-        /* create a prepared statement */
- 
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssss", $param_id, $param_name, $param_surname, $param_fathername, $param_grade, $param_mobile_number, $param_birthday);
-            
-            // Set parameters
-            $param_id = $id;
-            $param_name = $name;
-            $param_surname = $surname;
-            $param_fathername = $fathername;
-            $param_grade = $grade;
-            $param_mobile_number = $mobile_number;
-            $param_birthday = $birthday;
+        $student = new stdClass();
+        $student->id = $id ;
+        $student->name = $name ;
+        $student->surname = $surname;
+        $student->fathername = $fathername;
+        $student->grade = $grade;
+        $student->mobilenumber = $mobile_number ;
+        $student->birthday = $birthday ;
+        $data = json_encode($student);
 
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                $message = '<span style="color:green">You updated a student!</span>';
-            }else{
-                $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
-            }
+        callAPI('PUT', $db_service.'/api/student/'.$id, $data);
+
+
+        // Attempt to execute the prepared statement
+        if($httpcode == 200){
+            $message = '<span style="color:green">You updated a student!</span>';
+        }else{
+            $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
         }
         
-        // Close statement
-        mysqli_stmt_close($stmt);
     }
-    // Close connection
-    mysqli_close($link);
 }
 
 ?>

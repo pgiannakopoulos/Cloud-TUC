@@ -52,50 +52,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($message)){
+        $student = new stdClass();
+        $student->id = $id ;
+        $student->name = $name ;
+        $student->surname = $surname;
+        $student->fathername = $fathername;
+        $student->grade = $grade ;
+        $student->mobilenumber = $mobile_number ;
+        $student->birthday = $birthday ;
 
-        // Prepare a select statement
-        $sql = "INSERT INTO Students (ID, NAME, SURNAME, FATHERNAME, GRADE, MOBILENUMBER, Birthday)
-        VALUES (?,?,?,?,?,?,?)";
+        $data = json_encode($student);
+        $get_data = callAPI('POST', $db_service.'/api/student/', $data);
+        $response = json_decode($get_data, true);
 
-        /* create a prepared statement */
-        if($stmt = mysqli_prepare($link, $sql)){
 
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssss", $param_id, $param_name, $param_surname, $param_fathername, $param_grade, $param_mobile_number, $param_birthday);
-            
-            // Set parameters
-            $param_id = $id;
-            $param_name = $name;
-            $param_surname = $surname;
-            $param_fathername = $fathername;
-            $param_grade = $grade;
-            $param_mobile_number = $mobile_number;
-            $param_birthday = $birthday;
-
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                $message = '<span style="color:green">You added a student!</span>';
+        // Attempt to execute the prepared statement
+        if($httpcode == 201){
+            $message = '<span style="color:green">You added a student!</span>';
                 
-                //Update the history records
-                $added_students = $_SESSION["array_record"];
-                $p = $_SESSION["array_pointer"];
-                $added_students[$p] = array($id, $name, $surname);
-                $p++;
-                $_SESSION["array_pointer"] = $p;
-                $_SESSION["array_record"] = $added_students;
+            //Update the history records
+            $added_students = $_SESSION["array_record"];
+            $p = $_SESSION["array_pointer"];
+            $added_students[$p] = array($id, $name, $surname);
+            $p++;
+            $_SESSION["array_pointer"] = $p;
+            $_SESSION["array_record"] = $added_students;
 
-                //Erase fields for no resubmision
-                $id = $name = $surname = $fathername =  $grade = $mobile_number = $birthday = "";
-            }else{
-                $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
-            }
+            //Erase fields for no resubmision
+            $id = $name = $surname = $fathername =  $grade = $mobile_number = $birthday = "";
+        }else{
+            $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
         }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
     }
-    // Close connection
-    mysqli_close($link);
 }
 
 ?>

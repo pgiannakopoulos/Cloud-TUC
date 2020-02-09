@@ -38,22 +38,19 @@ require_once "functions.php";
                     <tbody>
 
                     <?php
-
                     // Show all student in the database
-                    $sql="SELECT ID, NAME, SURNAME FROM Students ORDER BY ID DESC;";
-                    $result = mysqli_query($link,$sql);
+                    $get_data = callAPI('GET', $db_service.'/api/student/', $data);
+                    $response = json_decode($get_data, true);
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) { 
+                    foreach ($response['records'] as $student){ 
                         echo "<tr>";
-                            echo '<td style="width: 23%;">'.$row["ID"].'</td>';
-                            echo '<td style="width: 23%;">'.$row["NAME"].'</td>';
-                            echo '<td style="width: 23%;">'.$row["SURNAME"].'</td>';
-                            echo '<td style="width: 8%; text-align: center;"><a href="delete.php?id='.$row["ID"].'" onclick="return ConfirmDelete()" ><i class="fa fa-trash"></i></a></td>';
-                        echo "</tr>";
-                        } 
+                            echo '<td style="width: 23%">'.$student['id'].'</td>';
+                            echo '<td style="width: 23%">'.$student["name"].'</td>';
+                            echo '<td style="width: 23%">'.$student["surname"].'</td>';
+                            echo '<td style="width: 8%; text-align: center;"><a href="delete.php?id='.$student["id"].'"><i class="fas fa-trash"></i></a></td>';
+                        echo "</tr>";                    
+         
                     }
-                    mysqli_close($link);
                     ?>
                     </tbody>
                 </table>

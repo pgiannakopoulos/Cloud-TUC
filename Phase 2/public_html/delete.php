@@ -18,13 +18,12 @@ $id=$_REQUEST['id'];
 
 
 //Delete the student record
-$sql='DELETE FROM Students WHERE ID="'.$id.'";';
+$get_data = callAPI('DELETE', $db_service.'/api/student/'.$id, $data);
 
-if (mysqli_query($link, $sql)) {
-    mysqli_close($link);
+if ($httpcode == 200) {
     header("location: DeleteStudent.php");
     exit;
 } else {
-    echo "Error deleting record: " . mysqli_error($conn);
+    echo "Error deleting record: ".$httpcode;
 }
 ?>

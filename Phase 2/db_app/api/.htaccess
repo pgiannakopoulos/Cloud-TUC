@@ -1,5 +1,6 @@
 RewriteEngine On
 Options +FollowSymLinks -MultiViews
+RewriteRule student/search/(.*)$  student/rest_api.php?s=$1 [L,QSA]
 RewriteRule student/(.*)$  student/rest_api.php?id=$1 [L,QSA]
 RewriteRule student  student/rest_api.php [NC,P]
 

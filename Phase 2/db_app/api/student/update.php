@@ -21,7 +21,7 @@ $student = new Student($db);
 $data = json_decode(file_get_contents("php://input"));
  
 // set ID property of student to be edited
-$student->id = $_GET['id'];
+$student->id = $_SERVER['id'];
  
 // set student property values
 $student->name = $data->name;

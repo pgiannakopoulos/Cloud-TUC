@@ -14,20 +14,22 @@ $uri = explode( '/', $uri );
 // the user id is, of course, optional and must be a number:
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $userId = $_REQUEST['id'];
-
-echo "ID=".$userId;
-
 // pass the request method and user ID to the PersonController and process the HTTP request:
-echo $requestMethod;
 if ($uri[2] == 'student') {
 	$controller = new StudentController();
 	switch ($requestMethod) {
 	    case 'GET':
-		    if ($userId) {
-	            $controller->readOneStudent($userId);
-	        }else{
-	            $controller->readStudents();
-	        };
+	    	if ($uri[3] == 'search') {
+	    		// get keywords
+				$keywords=isset($_GET["s"]) ? $_GET["s"] : "";
+	    		$controller->searchStudents($keywords);
+	    	}else{
+			    if ($userId) {
+		            $controller->readOneStudent($userId);
+		        }else{
+		            $controller->readStudents();
+		        };
+		    }
 			break;
 	    case 'POST':
 	    	$controller->createStudent();

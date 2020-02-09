@@ -14,33 +14,29 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once 'config.php';
 
 //Count Teachers
-$sql = 'SELECT COUNT(ID) AS TH_NUM FROM Teachers';
-$result = mysqli_query($link, $sql);
-$teacher_num = 0;
+$get_data = callAPI('GET', $db_service.'/api/teacher/read.php', false);
+$response = json_decode($get_data, true);
 
-if (mysqli_num_rows($result) > 0) {
-    $data = mysqli_fetch_assoc($result);
-    $teacher_num = $data['TH_NUM'];
-}
+$teacher_num = count($response['records']);
 
 //Count Students
-$sql = 'SELECT COUNT(ID) AS ST_NUM FROM Students';
-$result = mysqli_query($link, $sql);
-$student_num = 0;
+$get_data = callAPI('GET', $db_service.'/api/student/', false);
+$response = json_decode($get_data, true);
 
-if (mysqli_num_rows($result) > 0) {
-    $data = mysqli_fetch_assoc($result);
-    $student_num = $data['ST_NUM'];
-}
+$student_num = count($response['records']);
+
+
 
 //Calculate the average of the grade of all students
-$sql = 'SELECT AVG(GRADE) AS AVERAGE FROM Students';
-$result = mysqli_query($link, $sql);
+$sum = 0;
 $grade_avg = "-";
 
-if (mysqli_num_rows($result) > 0) {
-    $data = mysqli_fetch_assoc($result);
-    $grade_avg = round($data['AVERAGE'], 2); ;
+foreach ($response['records'] as $student){
+    $sum = $sum + $student['grade'];
+}
+
+if ($student_num > 0){
+    $grade_avg =  round($sum / $student_num , 2);
 }
 
  ?>

@@ -38,6 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($err)){
         $get_data = callAPI('GET', $db_service.'/api/teacher/read.php?id='.$username, false);
+
         if ($get_data) {
             $response = json_decode($get_data, true);
             // Check if username exists, if yes then verify password

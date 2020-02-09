@@ -110,12 +110,15 @@ class Student{
         $stmt = $this->conn->prepare($query);
      
         // sanitize
-        $this->name=htmlspecialchars(strip_tags($this->name));
-        $this->price=htmlspecialchars(strip_tags($this->price));
-        $this->description=htmlspecialchars(strip_tags($this->description));
-        $this->category_id=htmlspecialchars(strip_tags($this->category_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
-     
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->surname=htmlspecialchars(strip_tags($this->surname));
+        $this->fathername=htmlspecialchars(strip_tags($this->fathername));
+        $this->grade=htmlspecialchars(strip_tags($this->grade));
+        $this->mobilenumber=htmlspecialchars(strip_tags($this->mobilenumber));
+        $this->birthday=htmlspecialchars(strip_tags($this->birthday));
+
+        echo "2 ".$this->fathername;
         // bind new values
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
@@ -170,7 +173,6 @@ class Student{
         // sanitize
         $keywords=htmlspecialchars(strip_tags($keywords));
         $keywords = "%{$keywords}%";
-     
         // bind
         $stmt->bindParam(1, $keywords);
         $stmt->bindParam(2, $keywords);
