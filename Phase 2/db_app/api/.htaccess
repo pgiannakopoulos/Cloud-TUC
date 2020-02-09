@@ -4,3 +4,6 @@ RewriteRule student/search/(.*)$  student/rest_api.php?s=$1 [L,QSA]
 RewriteRule student/(.*)$  student/rest_api.php?id=$1 [L,QSA]
 RewriteRule student  student/rest_api.php [NC,P]
 
+RewriteRule teacher/(.*)$  teacher/rest_api.php?id=$1 [L,QSA]
+RewriteRule teacher  teacher/rest_api.php [NC,P]
+

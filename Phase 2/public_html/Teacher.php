@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once 'config.php';
 
 //Count Teachers
-$get_data = callAPI('GET', $db_service.'/api/teacher/read.php', false);
+$get_data = callAPI('GET', $db_service.'/api/teacher/', false);
 $response = json_decode($get_data, true);
 
 $teacher_num = count($response['records']);
