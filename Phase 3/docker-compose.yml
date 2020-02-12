@@ -1,0 +1,95 @@
+version: "3.1"
+services:
+  webserver:
+    build: 
+      context: './services_conf/website/'
+    volumes:
+      - ./services_depl/public_html/:/var/www/html/
+    container_name: webserver
+    depends_on:
+      - db_service
+    ports:
+      - "80:80"
+    networks:
+      default:
+        ipv4_address: 172.18.1.3
+  db_service:
+    build: 
+      context: './services_conf/db_service/'
+    volumes:
+      - ./services_depl/db_app:/var/www/html/
+    container_name: db_service
+    depends_on:
+      - mysql-db
+    ports:
+      - "8090:80"
+    networks:
+      default:
+        ipv4_address: 172.18.1.4
+  mysql-db:
+    build:
+      context: './services_conf/mysql/'
+    restart: always
+    hostname: mysql-db
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    volumes:
+      - data2:/var/lib/mysql
+    networks:
+      default:
+        ipv4_address: 172.18.1.6
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_HOST: '172.18.1.5'
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql-db
+  phpmyadmin:
+    depends_on:
+      - mysql-db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: rootpassword 
+    networks:
+      default:
+        ipv4_address: 172.18.1.7
+    container_name: phpmyadmin
+  keyrock:
+        image: fiware/idm:7.6.0
+        container_name: fiware-keyrock
+        hostname: keyrock
+        networks:
+            default:
+                ipv4_address: 172.18.1.5
+        depends_on:
+            - mysql-db
+        ports:
+            - "3000:3000"
+            - "443:443"
+        environment:
+            - DEBUG=idm:*
+            - IDM_DB_HOST=mysql-db
+            - IDM_HOST=http://localhost:3000
+            - IDM_PORT=3000
+            # Development use only
+            # Use Docker Secrets for Sensitive Data
+            - IDM_DB_PASS=rootpassword
+            - IDM_DB_USER=root
+            - IDM_ADMIN_USER=pgiannakopoulos1
+            - IDM_ADMIN_EMAIL=pgiannakopoulos1@isc.tuc.gr
+            - IDM_ADMIN_PASS=12345678
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.18.1.0/24
+volumes:
+  data2:
