@@ -17,7 +17,7 @@ require_once "functions.php";
  
 if(isset($_REQUEST["term"])){
     //search to db service
-    $get_data = callAPI('GET', $db_service.'/api/student/search/'.$_REQUEST["term"], $data);
+    $get_data = callAPI('GET', $db_service.'/api/student/search/'.$_REQUEST["term"], $data, false);
     $response = json_decode($get_data, true);
             
             // Check the number of rows in the result set

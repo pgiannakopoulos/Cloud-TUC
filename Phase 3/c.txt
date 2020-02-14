@@ -1,0 +1,8 @@
+curl --include \
+     --request POST \
+     --header "Content-Type: application/json" \
+     --data-binary "{
+  \"name\": \"pgiannakopoulos1@isc.tuc.gr\",
+  \"password\": \"12345678\"
+}" \
+'http://localhost:3000/v1/auth/tokens'

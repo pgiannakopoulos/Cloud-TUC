@@ -21,7 +21,7 @@ require_once "functions.php";
 $id=$_REQUEST['id'];
 
 //find the rest of the information
-$get_data = callAPI('GET', $db_service.'/api/student/'.$id, $data);
+$get_data = callAPI('GET', $db_service.'/api/student/'.$id, $data, false);
 $response = json_decode($get_data, true);
 
 $name = $response['name'];
@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $student->birthday = $birthday ;
         $data = json_encode($student);
 
-        callAPI('PUT', $db_service.'/api/student/'.$id, $data);
+        callAPI('PUT', $db_service.'/api/student/'.$id, $data, false);
 
 
         // Attempt to execute the prepared statement

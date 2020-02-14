@@ -35,7 +35,7 @@ require_once "functions.php";
                 <?php
                 
                 // Show all student in the database
-                $get_data = callAPI('GET', $db_service.'/api/student/', $data);
+                $get_data = callAPI('GET', $db_service.'/api/student/', $data, false);
                 $response = json_decode($get_data, true);
 
                 if ($httpcode == 200) {

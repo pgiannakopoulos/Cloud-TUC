@@ -1,12 +1,18 @@
 <?php
 /* Set REST API variables */
 $db_service = "db_service";
+
+/*Oauth2 credentials*/
+$auth_service = "http://172.18.1.10:3000";
+$auth_basic = "ODVmMDdjMDYtZDhiMy00ZjcyLTgzZWUtNjBiMWRiOGYwZThjOmViMWRhNzA1LTdiNWMtNGFkYi04
+MjBhLWIxZjk1MjYwNDJjNg=="; //echo -n id:secret | base64
+
 $httpcode = 0;
 
 /*Set timezone */
 date_default_timezone_set("Europe/Athens");
 
-function callAPI($method, $url, $data){
+function callAPI($method, $url, $data, $header){
    $curl = curl_init($url);
    switch ($method){
       case "POST":
@@ -28,9 +34,13 @@ function callAPI($method, $url, $data){
    }
    // curl_setopt($curl, CURLOPT_HEADER, true);    // we want headers
    curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+   if($header){
+      curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
+   }
    // EXECUTE:
    $result = curl_exec($curl);
    $GLOBALS['httpcode'] = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+   
    curl_close($curl);
 
    return $result;

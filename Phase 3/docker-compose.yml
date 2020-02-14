@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.3"
 services:
   webserver:
     build: 
@@ -8,11 +8,13 @@ services:
     container_name: webserver
     depends_on:
       - db_service
+    expose:
+      - "80"
     ports:
       - "80:80"
     networks:
       default:
-        ipv4_address: 172.18.1.3
+        ipv4_address: 172.18.1.9
   db_service:
     build: 
       context: './services_conf/db_service/'
@@ -63,29 +65,43 @@ services:
         ipv4_address: 172.18.1.7
     container_name: phpmyadmin
   keyrock:
-        image: fiware/idm:7.6.0
-        container_name: fiware-keyrock
-        hostname: keyrock
-        networks:
-            default:
-                ipv4_address: 172.18.1.5
-        depends_on:
-            - mysql-db
-        ports:
-            - "3000:3000"
-            - "443:443"
-        environment:
-            - DEBUG=idm:*
-            - IDM_DB_HOST=mysql-db
-            - IDM_HOST=http://localhost:3000
-            - IDM_PORT=3000
-            # Development use only
-            # Use Docker Secrets for Sensitive Data
-            - IDM_DB_PASS=rootpassword
-            - IDM_DB_USER=root
-            - IDM_ADMIN_USER=pgiannakopoulos1
-            - IDM_ADMIN_EMAIL=pgiannakopoulos1@isc.tuc.gr
-            - IDM_ADMIN_PASS=12345678
+    image: fiware/idm
+    container_name: fiware-keyrock
+    hostname: keyrock
+    restart: on-failure
+    networks:
+      default:
+        ipv4_address: 172.18.1.10
+    depends_on:
+      - mysql-db
+    ports:
+      - "3000:3000"
+      - "443:443"
+    environment:
+      - DEBUG=idm:*
+      - IDM_DB_HOST=mysql-db
+      - IDM_HOST=http://localhost:3000
+      - IDM_PORT=3000
+      # Development use only
+      # Use Docker Secrets for Sensitive Data
+      - IDM_DB_PASS=rootpassword
+      - IDM_DB_USER=root
+      - IDM_ADMIN_USER=pgiannakopoulos1
+      - IDM_ADMIN_EMAIL=pgiannakopoulos1@isc.tuc.gr
+      - IDM_ADMIN_PASS=12345678
+    volumes:
+        - ./config.js:/opt/fiware-idm/config.js
+  authzforce:
+    image: authzforce/server
+    hostname: authzforce
+    container_name: fiware-authzforce
+    networks:
+        default:
+            ipv4_address: 172.18.1.19
+    ports:
+        - "9090:8080"
+    volumes:
+        - ./authzforce/domains:/opt/authzforce-ce-server/data/domains
 networks:
   default:
     ipam:

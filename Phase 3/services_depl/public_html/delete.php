@@ -18,7 +18,7 @@ $id=$_REQUEST['id'];
 
 
 //Delete the student record
-$get_data = callAPI('DELETE', $db_service.'/api/student/'.$id, $data);
+$get_data = callAPI('DELETE', $db_service.'/api/student/'.$id, $data, false);
 
 if ($httpcode == 200) {
     header("location: DeleteStudent.php");

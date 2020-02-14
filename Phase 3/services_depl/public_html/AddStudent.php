@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $student->birthday = $birthday ;
 
         $data = json_encode($student);
-        $get_data = callAPI('POST', $db_service.'/api/student/', $data);
+        $get_data = callAPI('POST', $db_service.'/api/student/', $data, false);
         $response = json_decode($get_data, true);
 
 
