@@ -3,9 +3,8 @@
 $db_service = "db_service";
 
 /*Oauth2 credentials*/
-$auth_service = "http://172.18.1.10:3000";
-$auth_basic = "ODVmMDdjMDYtZDhiMy00ZjcyLTgzZWUtNjBiMWRiOGYwZThjOmViMWRhNzA1LTdiNWMtNGFkYi04
-MjBhLWIxZjk1MjYwNDJjNg=="; //echo -n id:secret | base64
+$auth_service = "http://172.18.1.5:3000";
+$auth_basic = "ODVmMDdjMDYtZDhiMy00ZjcyLTgzZWUtNjBiMWRiOGYwZThjOmViMWRhNzA1LTdiNWMtNGFkYi04MjBhLWIxZjk1MjYwNDJjNg=="; //echo -n id:secret | base64
 
 $httpcode = 0;
 
@@ -32,8 +31,9 @@ function callAPI($method, $url, $data, $header){
          if ($data)
             $url = sprintf("%s?%s", $url, http_build_query($data));
    }
-   // curl_setopt($curl, CURLOPT_HEADER, true);    // we want headers
+   curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
    curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+   
    if($header){
       curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
    }

@@ -91,7 +91,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <img class="logo2" src="images/system_logo.png">
             <h1>Login</h1>
             <p>Please fill in your credentials to login.</p>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+            <div class="tab">
+              <button class="tablinks" onclick="openLogin(event, 'stdnet')" id="defaultOpen">StdNET</button>
+              <button class="tablinks" onclick="openLogin(event, 'oauth2')">IDM</button>
+            </div>
+
+            <div id="stdnet" class="tabcontent">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <label for="username">
                         <i class="fas fa-user"></i>
                     </label>
@@ -100,15 +107,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <i class="fas fa-lock"></i>
                     </label>
                     <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
-                <div class="form-group">
-                    <input type="submit" value="Sumbit">
-                </div>
-            </form>
+                    <div class="form-group">
+                        <input type="submit" value="Sumbit">
+                    </div>
+                    <input type="hidden" name="login_type" value="1">
+                </form>
+            </div>
+
+            <div id="oauth2" class="tabcontent">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                    </label>
+                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>"placeholder="Username" id="username" required>  
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                    </label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+                    <div class="form-group">
+                        <input type="submit" value="Sumbit">
+                    </div>
+                    <input type="hidden" name="login_type" value="2">
+                </form>
+            </div>
             <div class="help-block"><?php echo $err; ?></div>
-            <p>OR</p>
-            <div class="oauth2"><button onclick="location.href='http://172.18.1.5:3000/oauth2/authorize?response_type=code&client_id=85f07c06-d8b3-4f72-83ee-60b1db8f0e8c&state=xyz&redirect_uri=http://localhost/Teacher.php'">Keyrock</button></div>
         </div>
     </div>
+    <button><a href="http://172.18.1.5:3000/oauth2/authorize?response_type=code&client_id=85f07c06-d8b3-4f72-83ee-60b1db8f0e8c&state=xyz
+&redirect_uri=http://localhost/Teacher.php">OAUTH2</a></button>
     <?php include 'footer.php'; ?> 
+
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>   
 </body>
 </html>

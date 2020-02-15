@@ -165,7 +165,7 @@ body {
 
 .login form input[type="submit"]:hover {
 	background-color: #2868c7;
-  	transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .login .help-block{
@@ -175,6 +175,28 @@ body {
 }
 
 .login .fas{
+  color: white;
+}
+
+/*OAUTH Button*/
+.oauth2{
+  text-align: center;
+}
+
+.oauth2 button{
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 6px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white; 
+  border: 2px solid #4CAF50;
+}
+
+.oauth2 button:hover {
+  background-color: #4CAF50;
   color: white;
 }
 

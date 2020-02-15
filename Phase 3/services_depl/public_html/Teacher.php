@@ -2,61 +2,78 @@
 //Database connection
 require_once 'config.php';
 
-// $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-// $parts = parse_url($url);
-// parse_str($parts['query'], $query);
-// // echo $query['code'];
+$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$parts = parse_url($url);
+parse_str($parts['query'], $query);
 
-// $header = array("Host: idm-portal",
-//                 "Authorization: Basic ODVmMDdjMDYtZDhiMy00ZjcyLTgzZWUtNjBiMWRiOGYwZThjOmViMWRhNzA1LTdiNWMtNGFkYi04
-// MjBhLWIxZjk1MjYwNDJjNg==",
-//                 "Content-Type: application/x-www-form-urlencoded");
+if ($query['code'] && !isset($_SESSION)) {
+    $header = array("Host: idm",
+                "Authorization: Basic ".$auth_basic,
+                "Content-Type: application/x-www-form-urlencoded");
 
-// $data = 'grant_type=authorization_code&code='.$query['code'].'&redirect_uri=http://localhost/Teacher.php';
+    $data = "grant_type=authorization_code&code=".$query['code']."&redirect_uri=http://localhost/Teacher.php";
 
-//             $get_data = callAPI("POST", 'http://172.18.1.10:3000/oauth2/token', $data, $header);
+    $get_data = callAPI("POST", $auth_service.'/oauth2/token', $data, $header);
 
-//             $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
-            // echo "--";
-            // echo $httpcode;
-            // echo "--";
-            // echo $get_data;
+    $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
+    
+    $array = array();
+    foreach($response as $x => $x_value) {
+        if (is_string ( $x_value)==true){
+            $array[$x] = $x_value;
+        }else{
+            if(is_string($x_value)==true){
+                foreach($x_value as $y => $y_value){
+                    if($y=="value")
+                        $array[$x] = $y_value;
+                }
+            }
 
-            // $array = array();
+        }
+    }
+    foreach($array as $y => $y_value){
+        if($y=="access_token"){
+            $access_token=$y_value;
+        }
+        if($y=="refresh_token"){
+            $refresh_token=$y_value;
+        }
+    }
+    if ($access_token) {
+        $get_data = callAPI("GET", $auth_service.'/user?access_token='.$access_token, false, false);
 
-            // foreach($response as $x => $x_value) {
-            //     if (is_string ( $x_value)==true){
-            //         $array[$x] = $x_value;
-            //     }else{
-            //         if(is_string($x_value)==true){
-            //             foreach($x_value as $y => $y_value){
-            //                 if($y=="value")
-            //                     $array[$x] = $y_value;
-            //             }
-            //         }
-            //     }
-            //   }
-            // foreach($array as $y => $y_value){
-            //     if($y=="access_token"){
-            //         $access_token=$y_value;
-            //     }
-            //     if($y=="refresh_token"){
-            //         $refresh_token=$y_value;
-            //     }
-            // }
+        $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
 
-            // echo $access_token;
-// Initialize the session
-if (!isset($_SESSION)) {
-    session_start();
+
+        session_start();
+        $_SESSION["access_token"] = $access_token; // start a session with the access_token
+        $_SESSION["loggedin"] = true;
+        $_SESSION["id"] = "oauth2_".substr($access_token, 0, 5);
+        $_SESSION["username"] = $response['username']; 
+        $_SESSION["firstname"] =$response['username']; 
+        $_SESSION["surname"] = "Undefined"; 
+        $_SESSION["email"] = $response['email']; 
+
+        //Initialize history table for students adds
+        $_SESSION["array_record"] = array();
+        $_SESSION["array_pointer"] = 0;
+    }else{
+        header("location: index.php");
+        exit;
+    }
+
+}else{
+    // Initialize the session
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+     
+    // Check if the user is logged in, if not then redirect him to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: index.php");
+        exit;
+    }
 }
- 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: index.php");
-    exit;
-}
-
 
 
 //Count Teachers

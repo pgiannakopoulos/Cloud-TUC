@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 services:
   webserver:
     build: 
@@ -29,27 +29,22 @@ services:
       default:
         ipv4_address: 172.18.1.4
   mysql-db:
-    build:
-      context: './services_conf/mysql/'
+    image: mysql:5.7
     restart: always
     hostname: mysql-db
+    container_name: mysql-db
     expose:
       - "3306"
     ports:
       - "3306:3306"
-    volumes:
-      - data2:/var/lib/mysql
     networks:
       default:
         ipv4_address: 172.18.1.6
     environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_ROOT_HOST: '172.18.1.5'
-    command: --default-authentication-plugin=mysql_native_password
-    container_name: mysql-db
+      - "MYSQL_ROOT_PASSWORD=rootpassword"
+      - "MYSQL_ROOT_HOST=172.18.1.5"
+    volumes:
+      - data2:/var/lib/mysql
   phpmyadmin:
     depends_on:
       - mysql-db
@@ -65,13 +60,12 @@ services:
         ipv4_address: 172.18.1.7
     container_name: phpmyadmin
   keyrock:
-    image: fiware/idm
+    image: fiware/idm:7.6.0
     container_name: fiware-keyrock
     hostname: keyrock
-    restart: on-failure
     networks:
       default:
-        ipv4_address: 172.18.1.10
+        ipv4_address: 172.18.1.5
     depends_on:
       - mysql-db
     ports:
@@ -82,15 +76,17 @@ services:
       - IDM_DB_HOST=mysql-db
       - IDM_HOST=http://localhost:3000
       - IDM_PORT=3000
-      # Development use only
-      # Use Docker Secrets for Sensitive Data
+        # Development use only
+        # Use Docker Secrets for Sensitive Data
       - IDM_DB_PASS=rootpassword
       - IDM_DB_USER=root
-      - IDM_ADMIN_USER=pgiannakopoulos1
-      - IDM_ADMIN_EMAIL=pgiannakopoulos1@isc.tuc.gr
-      - IDM_ADMIN_PASS=12345678
-    volumes:
-        - ./config.js:/opt/fiware-idm/config.js
+      - IDM_ADMIN_USER=admin
+      - IDM_ADMIN_EMAIL=admin@test.com
+      - IDM_ADMIN_PASS=1234
+      - IDM_PDP_LEVEL=advanced
+      - IDM_AUTHZFORCE_ENABLED=true
+      - IDM_AUTHZFORCE_HOST=authzforce
+      - IDM_AUTHZFORCE_PORT=8080
   authzforce:
     image: authzforce/server
     hostname: authzforce

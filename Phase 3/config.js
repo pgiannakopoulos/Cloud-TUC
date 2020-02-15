@@ -76,22 +76,14 @@ config.api = {
 // If authorization level is advanced you can create rules, HTTP verb+resource and XACML advanced. In addition
 // you need to have an instance of authzforce deployed to perform advanced authorization request from a Pep Proxy.
 // If authorization level is basic, only HTTP verb+resource rules can be created
-// config.authorization = {
-//     level: (process.env.IDM_PDP_LEVEL || 'basic'),     // basic|advanced
-//     authzforce: {
-//         enabled: to_boolean(process.env.IDM_AUTHZFORCE_ENABLED, false),
-//         host: (process.env.IDM_AUTHZFORCE_HOST || 'localhost'),
-//         port: (process.env.IDM_AUTHZFORCE_PORT||  8080),
-//     }
-// }
 config.authorization = {
-    level: "basic", // basic|advanced
+    level: (process.env.IDM_PDP_LEVEL || 'basic'),     // basic|advanced
     authzforce: {
-        enabled: false,
-        host: "localhost",
-        port: 8080
+        enabled: to_boolean(process.env.IDM_AUTHZFORCE_ENABLED, false),
+        host: (process.env.IDM_AUTHZFORCE_HOST || 'localhost'),
+        port: (process.env.IDM_AUTHZFORCE_PORT||  8080),
     }
-};
+}
 
 // Enable usage control and configure where is the Policy Translation Point
 config.usage_control = {
