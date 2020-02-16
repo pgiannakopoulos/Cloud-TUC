@@ -48,6 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         session_start();
                                 
                         // Store data in session variables
+                        $_SESSION["type"] = "stdnet";
                         $_SESSION["loggedin"] = true;
                         $_SESSION["id"] = $response['id'];
                         $_SESSION["username"] = $response['username']; 

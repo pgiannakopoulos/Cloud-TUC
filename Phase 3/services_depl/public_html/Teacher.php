@@ -15,6 +15,8 @@ if ($query['code'] && !isset($_SESSION)) {
 
     $get_data = callAPI("POST", $auth_service.'/oauth2/token', $data, $header);
 
+    echo $get_data;
+
     $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
     
     $array = array();
@@ -46,6 +48,7 @@ if ($query['code'] && !isset($_SESSION)) {
 
 
         session_start();
+        $_SESSION["type"] = "oauth2";
         $_SESSION["access_token"] = $access_token; // start a session with the access_token
         $_SESSION["loggedin"] = true;
         $_SESSION["id"] = "oauth2_".substr($access_token, 0, 5);
@@ -74,7 +77,6 @@ if ($query['code'] && !isset($_SESSION)) {
         exit;
     }
 }
-
 
 //Count Teachers
 $get_data = callAPI('GET', $db_service.'/api/teacher/', false,false);
