@@ -12,6 +12,9 @@ $message = "";
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
+}elseif (!$_SESSION["edit_access"]){
+    header("location: auth_error.php");
+    exit;
 }
 
 require_once "config.php";

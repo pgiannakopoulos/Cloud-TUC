@@ -15,6 +15,7 @@ $email_th = htmlspecialchars($_SESSION["email"]);
         <li><a href="EditStudent.php">Edit</a></li>
         <li><a href="DeleteStudent.php">Delete</a></li>
         <li><a href="SearchStudent.php">Search</a></li>
+        
         <li style="float:right" class="dropdown">
         <a class="dropbtn"><?php echo $firstname_th." ".$surname_th; ?></a>
             <div class="dropdown-content">

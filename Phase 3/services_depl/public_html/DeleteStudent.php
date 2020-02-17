@@ -8,6 +8,9 @@ if (!isset($_SESSION)) {
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
+}elseif (!$_SESSION["delete_access"]){
+    header("location: auth_error.php");
+    exit;
 }
 
 // Include config file

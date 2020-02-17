@@ -23,6 +23,8 @@ services:
     container_name: db_service
     depends_on:
       - mysql-db
+    ports:
+      - "8090:80"
     networks:
       default:
         ipv4_address: 172.18.1.4
@@ -53,9 +55,6 @@ services:
         - PEP_PASSWORD=pep_proxy_fdfdbb0e-38db-4776-9e3b-b35ea9f4a7c0
         - PEP_PROXY_PDP=keyrock
         - PEP_PROXY_MAGIC_KEY=thismagickeyfordb
-        - PEP_PROXY_AZF_PROTOCOL=http
-        - PEP_PROXY_AZF_HOST=keyrock
-        - PEP_PROXY_AZF_PORT=3000
   mysql-db:
     image: mysql:5.7
     restart: always
@@ -112,9 +111,6 @@ services:
       - IDM_ADMIN_EMAIL=admin@test.com
       - IDM_ADMIN_PASS=1234
       - IDM_PDP_LEVEL=basic
-      - IDM_AUTHZFORCE_ENABLED=false
-      - IDM_AUTHZFORCE_HOST=localhost
-      - IDM_AUTHZFORCE_PORT=3000
 networks:
   default:
     ipam:

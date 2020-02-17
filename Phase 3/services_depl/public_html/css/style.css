@@ -77,6 +77,14 @@ body {
   color: #356f5e;
 }
 
+.fa-check{
+  color: green;
+}
+
+.fa-ban{
+  color: red;
+}
+
 
 /*Login Screen*/
 

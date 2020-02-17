@@ -23,6 +23,8 @@ services:
     container_name: db_service
     depends_on:
       - mysql-db
+    ports:
+      - "8090:80"
     networks:
       default:
         ipv4_address: 172.18.1.4
@@ -35,6 +37,7 @@ services:
             ipv4_address: 172.18.1.16
     depends_on:
         - keyrock
+        - authzforce
     ports:
         - "8095:8095"
     expose:
@@ -51,11 +54,11 @@ services:
         - PEP_PROXY_APP_ID=7f8cbe4e-6b3e-4a9a-84d9-56bdc858cd6d
         - PEP_PROXY_USERNAME=pep_proxy_ed51d3ee-cb9e-460e-a822-ef918d786633
         - PEP_PASSWORD=pep_proxy_fdfdbb0e-38db-4776-9e3b-b35ea9f4a7c0
-        - PEP_PROXY_PDP=keyrock
+        - PEP_PROXY_PDP=authzforce
         - PEP_PROXY_MAGIC_KEY=thismagickeyfordb
         - PEP_PROXY_AZF_PROTOCOL=http
-        - PEP_PROXY_AZF_HOST=keyrock
-        - PEP_PROXY_AZF_PORT=3000
+        - PEP_PROXY_AZF_HOST=authzforce
+        - PEP_PROXY_AZF_PORT=8080
   mysql-db:
     image: mysql:5.7
     restart: always
@@ -96,6 +99,7 @@ services:
         ipv4_address: 172.18.1.5
     depends_on:
       - mysql-db
+      - authzforce
     ports:
       - "3000:3000"
       - "443:443"
@@ -111,10 +115,21 @@ services:
       - IDM_ADMIN_USER=admin
       - IDM_ADMIN_EMAIL=admin@test.com
       - IDM_ADMIN_PASS=1234
-      - IDM_PDP_LEVEL=basic
-      - IDM_AUTHZFORCE_ENABLED=false
-      - IDM_AUTHZFORCE_HOST=localhost
-      - IDM_AUTHZFORCE_PORT=3000
+      - IDM_PDP_LEVEL=advanced
+      - IDM_AUTHZFORCE_ENABLED=true
+      - IDM_AUTHZFORCE_HOST=authzforce
+      - IDM_AUTHZFORCE_PORT=8080
+  authzforce:
+    image: authzforce/server
+    hostname: authzforce
+    container_name: fiware-authzforce
+    networks:
+        default:
+            ipv4_address: 172.18.1.19
+    ports:
+        - "9090:8080"
+    volumes:
+        - ./authzforce/domains:/opt/authzforce-ce-server/data/domains
 networks:
   default:
     ipam:

@@ -15,43 +15,25 @@ if ($query['code'] && !isset($_SESSION)) {
 
     $get_data = callAPI("POST", $auth_service.'/oauth2/token', $data, $header);
 
-    echo $get_data;
-
     $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
     
-    $array = array();
-    foreach($response as $x => $x_value) {
-        if (is_string ( $x_value)==true){
-            $array[$x] = $x_value;
-        }else{
-            if(is_string($x_value)==true){
-                foreach($x_value as $y => $y_value){
-                    if($y=="value")
-                        $array[$x] = $y_value;
-                }
-            }
+    if ($response['access_token']) {
+        session_start();
+        $_SESSION["type"] = "oauth2";
+        $_SESSION["access_token"] = $response['access_token']; // start a session with the access_token
+         $_SESSION["refresh_token"] = $response['refresh_token'];
+        $_SESSION["token_type"] = $response['token_type'];
+        $_SESSION["loggedin"] = true;
+        $_SESSION["id"] = "oauth2_".substr($response['access_token'], 0, 5);
 
-        }
-    }
-    foreach($array as $y => $y_value){
-        if($y=="access_token"){
-            $access_token=$y_value;
-        }
-        if($y=="refresh_token"){
-            $refresh_token=$y_value;
-        }
-    }
-    if ($access_token) {
-        $get_data = callAPI("GET", $auth_service.'/user?access_token='.$access_token, false, false);
+        // echo $response['token_type'];
+
+        $get_data = callAPI("GET", $auth_service.'/user?access_token='.$response['access_token'], false, false);
 
         $response = json_decode($get_data, true); //When TRUE, returned objects will be converted into associative arrays
 
 
-        session_start();
-        $_SESSION["type"] = "oauth2";
-        $_SESSION["access_token"] = $access_token; // start a session with the access_token
-        $_SESSION["loggedin"] = true;
-        $_SESSION["id"] = "oauth2_".substr($access_token, 0, 5);
+        
         $_SESSION["username"] = $response['username']; 
         $_SESSION["firstname"] =$response['username']; 
         $_SESSION["surname"] = "Undefined"; 
@@ -60,6 +42,24 @@ if ($query['code'] && !isset($_SESSION)) {
         //Initialize history table for students adds
         $_SESSION["array_record"] = array();
         $_SESSION["array_pointer"] = 0;
+
+        //Set Permissions
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=POST&resource=api/student&app_id=".$web_id, false, false);
+        $response = json_decode($get_data, true);
+        $_SESSION["add_access"] = $response["authorization_decision"] == "Permit";
+
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=PUT&resource=api/student&app_id=".$web_id, false, false);
+        $response = json_decode($get_data, true);
+        $_SESSION["edit_access"] = $response["authorization_decision"]  == "Permit";
+
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=DELETE&resource=api/student&app_id=".$web_id, false, false);
+        $response = json_decode($get_data, true);
+        $_SESSION["delete_access"] = $response["authorization_decision"]  == "Permit";
+
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=GET&resource=api/student/search&app_id=".$web_id, false, false);
+        $response = json_decode($get_data, true);
+        $_SESSION["search_access"] = $response["authorization_decision"]  == "Permit";
+
     }else{
         header("location: index.php");
         exit;
@@ -172,10 +172,51 @@ if ($student_num > 0) {
                     </div>
                 </div>
             </div>
-            <div class="container-fluid my_table">
-                <div class="row">
-                    <h2>Student Records</h1>
-                    <?php include 'student_records.php'; ?>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="container-fluid info">
+                        <h2>Student Records</h2>
+                        <?php include 'student_records.php'; ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="container-fluid info">
+                        <h2>Permissions</h2>
+                        <div class="row">
+                            <div class="col-xs-8"><strong>ADD: </strong></div>
+                            <div class="col-xs-4">
+                            <?php if ($_SESSION["add_access"])
+                                echo "<i class='fa fa-check' aria-hidden='true'></i>";
+                                else
+                                echo "<i class='fa fa-ban' aria-hidden='true'></i>";
+                            ?></div>
+
+                            <div class="col-xs-8"><strong>EDIT: </strong></div>
+                            <div class="col-xs-4">
+                            <?php if ($_SESSION["edit_access"])
+                                echo "<i class='fa fa-check' aria-hidden='true'></i>";
+                                else
+                                echo "<i class='fa fa-ban' aria-hidden='true'></i>";
+                            ?></div>
+
+                            <div class="col-xs-8"><strong>DELETE: </strong></div>
+                            <div class="col-xs-4">
+                            <?php if ($_SESSION["delete_access"])
+                                echo "<i class='fa fa-check' aria-hidden='true'></i>";
+                                else
+                                echo "<i class='fa fa-ban' aria-hidden='true'></i>";
+                            ?></div>
+
+                            <div class="col-xs-8"><strong>SEARCH: </strong></div>
+                            <div class="col-xs-4">
+                            <?php if ($_SESSION["search_access"])
+                                echo "<i class='fa fa-check' aria-hidden='true'></i>";
+                                else
+                                echo "<i class='fa fa-ban' aria-hidden='true'></i>";
+                            ?></div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

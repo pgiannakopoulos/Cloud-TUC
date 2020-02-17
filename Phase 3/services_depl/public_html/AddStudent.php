@@ -16,6 +16,9 @@ $added_students = $_SESSION["array_record"];
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
+}elseif (!$_SESSION["add_access"]){
+    header("location: auth_error.php");
+    exit;
 }
 
 require_once "config.php";

@@ -1,10 +1,16 @@
 <?php
 /* Set REST API variables */
-$db_service = "db_service";
+$db_service = "http://172.18.1.4";
 
 /*Oauth2 credentials*/
 $auth_service = "http://172.18.1.5:3000";
 $auth_basic = "ODVmMDdjMDYtZDhiMy00ZjcyLTgzZWUtNjBiMWRiOGYwZThjOmViMWRhNzA1LTdiNWMtNGFkYi04MjBhLWIxZjk1MjYwNDJjNg=="; //echo -n id:secret | base64
+
+$web_id = "85f07c06-d8b3-4f72-83ee-60b1db8f0e8c";
+
+
+$auth_basic2 = "N2Y4Y2JlNGUtNmIzZS00YTlhLTg0ZDktNTZiZGM4NThjZDZkOmVmOGFkMmE3LTZkM2QtNDQ4ZS1i
+ZjA3LTcxY2ViNDFiOGY1Mw=="; //echo -n id:secret | base64
 
 $httpcode = 0;
 
