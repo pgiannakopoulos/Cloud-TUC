@@ -44,21 +44,22 @@ if ($query['code'] && !isset($_SESSION)) {
         $_SESSION["array_pointer"] = 0;
 
         //Set Permissions
-        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=POST&resource=api/student&app_id=".$web_id, false, false);
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=POST&resource=/api/student/&app_id=".$web_id, false, false);
         $response = json_decode($get_data, true);
         $_SESSION["add_access"] = $response["authorization_decision"] == "Permit";
 
-        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=PUT&resource=api/student&app_id=".$web_id, false, false);
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=PUT&resource=/api/student/&app_id=".$web_id, false, false);
         $response = json_decode($get_data, true);
         $_SESSION["edit_access"] = $response["authorization_decision"]  == "Permit";
 
-        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=DELETE&resource=api/student&app_id=".$web_id, false, false);
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=DELETE&resource=/api/student&app_id=".$web_id, false, false);
         $response = json_decode($get_data, true);
         $_SESSION["delete_access"] = $response["authorization_decision"]  == "Permit";
 
-        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=GET&resource=api/student/search&app_id=".$web_id, false, false);
+        $get_data = callAPI("GET", $auth_service."/user?access_token=".$_SESSION["access_token"]."&action=GET&resource=/api/student/search&app_id=".$web_id, false, false);
         $response = json_decode($get_data, true);
         $_SESSION["search_access"] = $response["authorization_decision"]  == "Permit";
+        header("location: Teacher.php");
 
     }else{
         header("location: index.php");
@@ -79,13 +80,15 @@ if ($query['code'] && !isset($_SESSION)) {
 }
 
 //Count Teachers
-$get_data = callAPI('GET', $db_service.'/api/teacher/', false,false);
+$header = array("Authorization: "." ".$_SESSION["token_type"]." ".$_SESSION["access_token"]);
+$get_data = callAPI('GET', $db_service.'/api/teacher/', false,$header);
 $response = json_decode($get_data, true);
+
 
 $teacher_num = count($response['records']);
 
 //Count Students
-$get_data = callAPI('GET', $db_service.'/api/student/', false,false);
+$get_data = callAPI('GET', $db_service.'/api/student', false,$header);
 $response = json_decode($get_data, true);
 
 if ($httpcode== 200) {

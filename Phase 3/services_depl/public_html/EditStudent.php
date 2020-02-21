@@ -8,10 +8,11 @@ if (!isset($_SESSION)) {
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
-}elseif (!$_SESSION["edit_access"]){
-    header("location: auth_error.php");
-    exit;
 }
+// elseif (!$_SESSION["edit_access"]){
+//     header("location: auth_error.php");
+//     exit;
+// }
 
 require_once "config.php";
 require_once "functions.php";
@@ -38,7 +39,8 @@ require_once "functions.php";
                 <?php
                 
                 // Show all student in the database
-                $get_data = callAPI('GET', $db_service.'/api/student/', $data, false);
+                $header = array("Authorization: "." ".$_SESSION["token_type"]." ".$_SESSION["access_token"]);
+                $get_data = callAPI('GET', $db_service.'/api/student', $data, $header);
                 $response = json_decode($get_data, true);
 
                 if ($httpcode == 200) {
@@ -51,10 +53,13 @@ require_once "functions.php";
                         echo "</tr>";                    
          
                     }
-                }else{
-
+                }elseif ($httpcode == 401) {
                     echo "<tr>";
-                        echo '<td colspan="4" style="text-align: center;">No studets found...</td>';
+                    echo '<td colspan="4" style="text-align: center;">Unauthorized action!</td>';
+                    echo "</tr>";
+                }else{
+                    echo "<tr>";
+                    echo '<td colspan="4" style="text-align: center;">No studets found...</td>';
                     echo "</tr>";
                 }
                 ?>

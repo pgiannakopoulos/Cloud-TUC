@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </form>
             <div class="help-block"><?php echo $err; ?></div>
             <p>OR</p>
-            <div class="oauth2"><button onclick="location.href='http://172.18.1.5:3000/oauth2/authorize?response_type=code&client_id=85f07c06-d8b3-4f72-83ee-60b1db8f0e8c&state=xyz&redirect_uri=http://localhost/Teacher.php'">Keyrock</button></div>
+            <div class="oauth2"><button onclick="location.href='http://172.18.1.5:3000/oauth2/authorize?response_type=code&client_id=ad817d0b-35c7-4497-ad7c-896629aa1879&state=xyz&redirect_uri=http://localhost/Teacher.php'">Connect with Keyrock</button></div>
         </div>
     </div>
     <?php include 'footer.php'; ?> 

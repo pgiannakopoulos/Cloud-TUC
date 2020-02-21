@@ -103,13 +103,12 @@ class Student{
     // update the student
     function update(){     
         // update query
-        $query = "UPDATE ". $this->table_name ." SET ID=:id, NAME=:name, SURNAME=:surname, FATHERNAME =:fathername, GRADE =:grade, MOBILENUMBER =:mobilenumber, Birthday =:birthday WHERE ID=".$this->id; 
-     
+        $query = "UPDATE Students SET NAME=:name, SURNAME=:surname, FATHERNAME=:fathername, GRADE=:grade, MOBILENUMBER=:mobilenumber, Birthday=:birthday WHERE ID=:id"; 
+       
         // prepare query statement
         $stmt = $this->conn->prepare($query);
      
         // sanitize
-        $this->id=htmlspecialchars(strip_tags($this->id));
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->surname=htmlspecialchars(strip_tags($this->surname));
         $this->fathername=htmlspecialchars(strip_tags($this->fathername));

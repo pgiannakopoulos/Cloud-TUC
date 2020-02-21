@@ -155,37 +155,57 @@ class StudentController
 	public function updateStudent($id){
 		// get id of student to be edited
 		$data = json_decode(file_get_contents("php://input"));
-		 
-		// set ID property of student to be edited
-		$this->student->id = $id;
-		 
-		// set student property values
-		$this->student->name = $data->name;
-		$this->student->surname = $data->surname;
-		$this->student->fathername = $data->fathername;
-		$this->student->grade = $data->grade;
-		$this->student->mobilenumber = $data->mobilenumber;
-		$this->student->birthday = $data->birthday;
+		// make sure data is not empty
+		if(
+		    !empty($data->id) &&
+		    !empty($data->name) &&
+		    !empty($data->surname) &&
+		    !empty($data->fathername) &&
+		    !empty($data->grade) &&
+		    !empty($data->mobilenumber) &&
+		    !empty($data->birthday)
+		){
+			// set ID property of student to be edited
+			$this->student->id = $id;
+			 
+			// set student property values
+			$this->student->name = $data->name;
+			$this->student->surname = $data->surname;
+			$this->student->fathername = $data->fathername;
+			$this->student->grade = $data->grade;
+			$this->student->mobilenumber = $data->mobilenumber;
+			$this->student->birthday = $data->birthday;
 
-		// update the student
-		if($this->student->update()){
-		 
-		    // set response code - 200 ok
-		    http_response_code(200);
-		 
-		    // tell the user
-		    echo json_encode(array("message" => "student was updated."));
+			// update the student
+			if($this->student->update()){
+			 
+			    // set response code - 200 ok
+			    http_response_code(200);
+			 
+			    // tell the user
+			    echo json_encode(array("message" => "student was updated."));
+			}
+			 
+			// if unable to update the student, tell the user
+			else{
+			 
+			    // set response code - 503 service unavailable
+			    http_response_code(503);
+			 
+			    // tell the user
+			    echo json_encode(array("message" => "Unable to update student."));
+			}
 		}
 		 
-		// if unable to update the student, tell the user
+		// tell the user data is incomplete
 		else{
-		 
-		    // set response code - 503 service unavailable
-		    http_response_code(503);
+		    // set response code - 400 bad request
+		    http_response_code(400);
 		 
 		    // tell the user
-		    echo json_encode(array("message" => "Unable to update student."));
+		    echo json_encode(array("message" => "Unable to update student. Data is incomplete."));
 		}
+
 	}
 
 	public function deleteStudent($id){
@@ -247,7 +267,8 @@ class StudentController
 		            "fathername" => $FATHERNAME,
 		            "grade" => $GRADE,
 		            "mobilenumber" => $MOBILENUMBER,
-		            "birthday" => $Birthday
+		            "birthday" => $Birthday,
+		            "key"=>$keywords
 		        );
 		 
 		        array_push($students_arr["records"], $student_item);

@@ -12,10 +12,11 @@ $message = "";
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
-}elseif (!$_SESSION["edit_access"]){
-    header("location: auth_error.php");
-    exit;
 }
+// elseif (!$_SESSION["edit_access"]){
+//     header("location: auth_error.php");
+//     exit;
+// }
 
 require_once "config.php";
 require_once "functions.php";
@@ -24,7 +25,8 @@ require_once "functions.php";
 $id=$_REQUEST['id'];
 
 //find the rest of the information
-$get_data = callAPI('GET', $db_service.'/api/student/'.$id, $data, false);
+$header = array("Authorization: "." ".$_SESSION["token_type"]." ".$_SESSION["access_token"]);
+$get_data = callAPI('GET', $db_service.'/api/student?id='.$id, $data, $header);
 $response = json_decode($get_data, true);
 
 $name = $response['name'];
@@ -76,12 +78,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $student->birthday = $birthday ;
         $data = json_encode($student);
 
-        callAPI('PUT', $db_service.'/api/student/'.$id, $data, false);
+        $header = array("Authorization: "." ".$_SESSION["token_type"]." ".$_SESSION["access_token"]);
+        callAPI('PUT', $db_service.'/api/student/?id='.$id, $data, $header);
 
 
         // Attempt to execute the prepared statement
         if($httpcode == 200){
             $message = '<span style="color:green">You updated a student!</span>';
+        }elseif($httpcode == 401){
+            $message = '<span style="color:red">Unauthorized action!</span>';
         }else{
             $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
         }

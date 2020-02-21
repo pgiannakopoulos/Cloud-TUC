@@ -16,10 +16,11 @@ $added_students = $_SESSION["array_record"];
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
-}elseif (!$_SESSION["add_access"]){
-    header("location: auth_error.php");
-    exit;
 }
+//elseif (!$_SESSION["add_access"]){
+//     header("location: auth_error.php");
+//     exit;
+// }
 
 require_once "config.php";
 require_once "functions.php";
@@ -51,8 +52,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (!filter_var($mobile_number, FILTER_VALIDATE_INT)) {
         $message = '<span style="color:red">Invalid mobile number!</span>';
     }
-
-    
     // Validate credentials
     if(empty($message)){
         $student = new stdClass();
@@ -65,7 +64,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $student->birthday = $birthday ;
 
         $data = json_encode($student);
-        $get_data = callAPI('POST', $db_service.'/api/student/', $data, false);
+        $header = array("Authorization: "." ".$_SESSION["token_type"]." ".$_SESSION["access_token"]);
+        $get_data = callAPI('POST', $db_service.'/api/student/', $data, $header);
         $response = json_decode($get_data, true);
 
 
@@ -83,6 +83,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             //Erase fields for no resubmision
             $id = $name = $surname = $fathername =  $grade = $mobile_number = $birthday = "";
+        }elseif ($httpcode == 401){
+            $message = '<span style="color:red">Unauthorized action!</span>';
         }else{
             $message = '<span style="color:red">Oops! Something went wrong. Please try again later.</span>';
         }
