@@ -1,0 +1,28 @@
+URLS
+1. localhost --> Portal
+2. localhost:3000 --> IDM/Keyrock
+3. localhost:8080 --> phpmyadmin
+
+Users
+email: pgiannakopoulos1@isc.tuc.gr (admin)
+password: 1234
+email: user1@test.com
+password: 1234
+email: user2@test.com
+password: 1234
+
+MySQL:
+username: root
+password: rootpassword
+
+Steps to use the created users and rules:
+1. docker-compose up
+2. login to phpmyadmin
+3. delete current idm db
+4. import idm.sql from backup folder
+5. docker-compose down
+6. docker-compose up
+
+Steps to create new users and rules:
+1. delete the folder services/authzforce
+2. docker-compose up
